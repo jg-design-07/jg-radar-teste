@@ -4,143 +4,185 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JG Design — Painel</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --green:#2ECC71;--gbg:rgba(30,74,46,0.3);--gborder:rgba(46,204,113,0.3);
+  --green:#2ECC71;--gbg:rgba(30,74,46,0.25);--gborder:rgba(46,204,113,0.3);
   --bg:#0f0f0f;--bg2:#161616;--bg3:#1e1e1e;--bg4:#252525;--bg5:#2d2d2d;
-  --white:#f0f0f0;--gray:#aaa;--gray2:#666;--red:#e74c3c;--amber:#f0a500;--blue:#3498db;--r:12px;
+  --white:#f0f0f0;--gray:#aaa;--gray2:#555;--red:#e74c3c;--amber:#f0a500;--blue:#3498db;--r:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;min-height:100vh;}
-.screen{display:none;} .screen.on{display:block;}
+.screen{display:none;}.screen.on{display:block;}
+a{color:inherit;text-decoration:none;}
 
 /* LOGIN */
-.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 20% 20%,#0d3320,transparent 50%),var(--bg);}
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 20% 20%,#0d3320,transparent 50%),var(--bg);}
 .login-card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:2.5rem;width:100%;max-width:380px;}
-.login-logo{font-size:11px;font-weight:600;letter-spacing:4px;color:var(--gray2);text-transform:uppercase;text-align:center;margin-bottom:6px;}
-.login-sep{width:50px;height:2px;background:var(--green);margin:10px auto 24px;}
-.login-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;text-align:center;margin-bottom:4px;}
-.login-sub{font-size:12px;color:var(--gray2);text-align:center;margin-bottom:28px;}
-.field{margin-bottom:14px;}
-.field label{display:block;font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--gray2);text-transform:uppercase;margin-bottom:6px;}
+.login-logo-img{display:block;width:80px;margin:0 auto 1rem;}
+.login-sep{width:50px;height:2px;background:var(--green);margin:0 auto 1.5rem;}
+.login-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;text-align:center;margin-bottom:4px;}
+.login-sub{font-size:12px;color:var(--gray2);text-align:center;margin-bottom:1.5rem;}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--gray2);text-transform:uppercase;margin-bottom:5px;}
 .field input{width:100%;background:var(--bg3);border:1px solid var(--bg4);border-radius:9px;padding:10px 13px;color:var(--white);font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s;}
 .field input:focus{border-color:var(--green);}
 .login-btn{width:100%;padding:11px;background:var(--green);color:#000;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .15s;}
 .login-btn:hover{opacity:.85;}
-.login-err{font-size:12px;color:var(--red);text-align:center;margin-top:10px;display:none;}
+.login-err{font-size:12px;color:var(--red);text-align:center;margin-top:8px;display:none;}
 
 /* LAYOUT */
-.app-layout{display:flex;min-height:100vh;}
-.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--bg4);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:50;}
-.main{margin-left:220px;flex:1;min-height:100vh;}
+.app-wrap{display:flex;min-height:100vh;}
+.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--bg4);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:50;overflow-y:auto;}
+.main{margin-left:220px;flex:1;}
 
 /* SIDEBAR */
-.sidebar-logo{padding:1.25rem 1.25rem 1rem;border-bottom:1px solid var(--bg4);}
-.sidebar-logo h1{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--white);}
-.sidebar-logo p{font-size:11px;color:var(--gray2);margin-top:2px;}
-.nav{flex:1;padding:.75rem 0;}
-.nav-item{display:flex;align-items:center;gap:10px;padding:.65rem 1.25rem;font-size:13px;color:var(--gray);cursor:pointer;transition:all .15s;border:none;background:none;width:100%;font-family:'Inter',sans-serif;text-align:left;}
+.sidebar-top{padding:1.25rem;border-bottom:1px solid var(--bg4);display:flex;align-items:center;gap:10px;}
+.sidebar-logo{width:38px;height:38px;object-fit:contain;flex-shrink:0;}
+.sidebar-brand h1{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;}
+.sidebar-brand p{font-size:10px;color:var(--gray2);}
+.nav{flex:1;padding:.5rem 0;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:.6rem 1.25rem;font-size:13px;color:var(--gray);cursor:pointer;transition:all .15s;border:none;background:none;width:100%;font-family:'Inter',sans-serif;text-align:left;}
 .nav-item:hover{color:var(--white);background:var(--bg3);}
 .nav-item.active{color:var(--green);background:var(--gbg);font-weight:600;}
-.nav-item svg{width:16px;height:16px;flex-shrink:0;}
-.nav-sep{height:1px;background:var(--bg4);margin:.5rem 1.25rem;}
+.nav-item svg{width:15px;height:15px;flex-shrink:0;}
+.nav-sep{height:1px;background:var(--bg4);margin:.4rem 1rem;}
+.nav-label{padding:.4rem 1.25rem;font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--gray2);text-transform:uppercase;}
 .sidebar-foot{padding:1rem 1.25rem;border-top:1px solid var(--bg4);}
-.sidebar-foot .logout{font-size:12px;color:var(--gray2);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:8px;transition:color .15s;padding:0;}
-.sidebar-foot .logout:hover{color:var(--red);}
+.logout-btn{font-size:12px;color:var(--gray2);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:8px;}
+.logout-btn:hover{color:var(--red);}
 
-/* HEADER MAIN */
-.main-header{background:var(--bg2);border-bottom:1px solid var(--bg4);height:54px;display:flex;align-items:center;padding:0 1.5rem;gap:12px;}
-.main-header h2{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;flex:1;}
-.btn{font-size:12px;font-weight:600;padding:7px 16px;border-radius:8px;border:none;cursor:pointer;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s;}
+/* MAIN HEADER */
+.main-hdr{background:var(--bg2);border-bottom:1px solid var(--bg4);height:54px;display:flex;align-items:center;padding:0 1.5rem;gap:12px;position:sticky;top:0;z-index:40;}
+.main-hdr h2{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;flex:1;}
+.btn{font-size:12px;font-weight:600;padding:7px 15px;border-radius:8px;border:none;cursor:pointer;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s;white-space:nowrap;}
 .btn:hover{opacity:.85;}
 .btn-primary{background:var(--green);color:#000;}
 .btn-ghost{background:var(--bg3);color:var(--gray);border:1px solid var(--bg4);}
-.btn-ghost:hover{color:var(--white);background:var(--bg4);}
-.btn-blue{background:#3498db22;color:var(--blue);border:1px solid #3498db44;}
-.btn-red{background:#e74c3c22;color:var(--red);border:1px solid #e74c3c44;}
+.btn-ghost:hover{color:var(--white);}
+.btn-blue{background:rgba(52,152,219,.15);color:var(--blue);border:1px solid rgba(52,152,219,.3);}
+.btn-red{background:rgba(231,76,60,.15);color:var(--red);border:1px solid rgba(231,76,60,.3);}
+.btn-amber{background:rgba(240,165,0,.15);color:var(--amber);border:1px solid rgba(240,165,0,.3);}
 
 /* CONTENT */
 .content{padding:1.5rem;}
+.sec-lbl{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--green);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.sec-lbl::after{content:'';flex:1;height:1px;background:rgba(46,204,113,.15);}
 
 /* METRICS */
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:1.5rem;}
 .metric{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:1rem 1.25rem;}
 .metric-lbl{font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
 .metric-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;line-height:1;}
-.metric-val.g{color:var(--green);} .metric-val.r{color:var(--red);} .metric-val.a{color:var(--amber);}
-
-/* SECTION */
-.sec-lbl{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--green);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
-.sec-lbl::after{content:'';flex:1;height:1px;background:rgba(46,204,113,.15);}
+.metric-val.g{color:var(--green);}.metric-val.r{color:var(--red);}.metric-val.a{color:var(--amber);}
 
 /* CARDS */
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:1.5rem;}
 .card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:1.25rem;cursor:pointer;transition:border-color .15s;}
 .card:hover{border-color:var(--gborder);}
-.card.selected{border-color:var(--green);border-width:1.5px;}
 .card-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:3px;}
 .card-sub{font-size:12px;color:var(--gray2);margin-bottom:10px;}
 .card-chips{display:flex;gap:6px;flex-wrap:wrap;}
 .chip{font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;}
-.chip-ok  {background:rgba(46,204,113,.12);color:#2ECC71;border:1px solid rgba(46,204,113,.3);}
-.chip-no  {background:rgba(231,76,60,.12); color:#e74c3c;border:1px solid rgba(231,76,60,.3);}
-.chip-alt {background:rgba(240,165,0,.12); color:#f0a500;border:1px solid rgba(240,165,0,.3);}
+.chip-ok{background:rgba(46,204,113,.12);color:#2ECC71;border:1px solid rgba(46,204,113,.3);}
+.chip-no{background:rgba(231,76,60,.12);color:#e74c3c;border:1px solid rgba(231,76,60,.3);}
+.chip-alt{background:rgba(240,165,0,.12);color:#f0a500;border:1px solid rgba(240,165,0,.3);}
 .chip-wait{background:rgba(255,255,255,.05);color:var(--gray2);border:1px solid rgba(255,255,255,.1);}
-.chip-blue{background:rgba(52,152,219,.12);color:var(--blue);border:1px solid rgba(52,152,219,.3);}
 
-/* RADAR LIST */
+/* RADAR ROWS */
 .radar-list{display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem;}
-.radar-row{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;gap:14px;flex-wrap:wrap;transition:border-color .15s;}
+.radar-row{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .radar-row:hover{border-color:rgba(46,204,113,.2);}
 .radar-row-info{flex:1;min-width:180px;}
 .radar-row-name{font-size:14px;font-weight:600;margin-bottom:2px;}
 .radar-row-sub{font-size:12px;color:var(--gray2);margin-bottom:8px;}
-.radar-row-chips{display:flex;gap:6px;flex-wrap:wrap;}
-.radar-row-acts{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.radar-chips{display:flex;gap:6px;flex-wrap:wrap;}
+.radar-acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;flex-shrink:0;}
 
 /* TABLE */
-.table-wrap{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);overflow:hidden;}
+.table-wrap{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);overflow:hidden;margin-bottom:1rem;}
 table{width:100%;border-collapse:collapse;}
 th{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--gray2);padding:10px 14px;text-align:left;border-bottom:1px solid var(--bg4);}
-td{font-size:13px;padding:11px 14px;border-bottom:1px solid #1a1a1a;vertical-align:middle;}
+td{font-size:13px;padding:10px 14px;border-bottom:1px solid #1a1a1a;vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(255,255,255,.02);}
 .tipo-tag{font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:99px;white-space:nowrap;}
-.tipo-reels    {background:#e74c3c18;color:#e74c3c;border:1px solid #e74c3c33;}
-.tipo-foto     {background:#f39c1218;color:#f39c12;border:1px solid #f39c1233;}
-.tipo-arte     {background:#3498db18;color:#3498db;border:1px solid #3498db33;}
+.tipo-reels{background:#e74c3c18;color:#e74c3c;border:1px solid #e74c3c33;}
+.tipo-foto{background:#f39c1218;color:#f39c12;border:1px solid #f39c1233;}
+.tipo-arte{background:#3498db18;color:#3498db;border:1px solid #3498db33;}
 .tipo-carrossel{background:#9b59b618;color:#9b59b6;border:1px solid #9b59b633;}
 .s-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;white-space:nowrap;}
-.s-ap  {background:rgba(46,204,113,.12);color:#2ECC71;border:1px solid rgba(46,204,113,.3);}
-.s-re  {background:rgba(231,76,60,.12); color:#e74c3c;border:1px solid rgba(231,76,60,.3);}
-.s-alt {background:rgba(240,165,0,.12); color:#f0a500;border:1px solid rgba(240,165,0,.3);}
+.s-ap{background:rgba(46,204,113,.12);color:#2ECC71;border:1px solid rgba(46,204,113,.3);}
+.s-re{background:rgba(231,76,60,.12);color:#e74c3c;border:1px solid rgba(231,76,60,.3);}
+.s-alt{background:rgba(240,165,0,.12);color:#f0a500;border:1px solid rgba(240,165,0,.3);}
 .s-wait{background:rgba(255,255,255,.05);color:var(--gray2);border:1px solid rgba(255,255,255,.1);}
-.com-preview{font-size:12px;color:var(--amber);background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.2);border-radius:6px;padding:4px 8px;margin-top:4px;max-width:300px;}
 
-/* MODAL / DRAWER */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem;}
+/* OVERLAY / MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem;overflow-y:auto;}
 .overlay.open{display:flex;}
-.modal{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:2rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;}
-.modal h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:1.5rem;}
+.modal{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:2rem;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;}
+.modal h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
 .modal-acts{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;}
-.m-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.m-form-grid.full{grid-template-columns:1fr;}
-.m-field{display:flex;flex-direction:column;gap:6px;}
-.m-field label{font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--gray2);text-transform:uppercase;}
-.m-field input,.m-field select{background:var(--bg3);border:1px solid var(--bg4);border-radius:8px;padding:9px 12px;color:var(--white);font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s;}
-.m-field input:focus,.m-field select:focus{border-color:var(--green);}
-.m-field select option{background:var(--bg3);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.form-grid.full{grid-template-columns:1fr;}
+.form-field{display:flex;flex-direction:column;gap:5px;}
+.form-field label{font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--gray2);text-transform:uppercase;}
+.form-field input,.form-field select,.form-field textarea{background:var(--bg3);border:1px solid var(--bg4);border-radius:8px;padding:9px 12px;color:var(--white);font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s;width:100%;}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--green);}
+.form-field select option{background:var(--bg3);}
+.form-field textarea{resize:vertical;min-height:80px;line-height:1.5;}
 
-/* DETAIL */
-.detail-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap;}
-.detail-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:3px;}
-.detail-sub{font-size:13px;color:var(--gray2);}
-.detail-chips{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
-.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--gray2);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;padding:0;margin-bottom:1.25rem;transition:color .15s;}
-.back-btn:hover{color:var(--white);}
-.comment-cell{max-width:260px;}
-.comment-text{font-size:12px;color:var(--amber);font-style:italic;}
+/* POSTS BUILDER */
+.posts-builder{margin-top:1.5rem;}
+.posts-builder-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.posts-builder-hdr h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;}
+.post-item{background:var(--bg3);border:1px solid var(--bg4);border-radius:10px;padding:12px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px;}
+.post-item-num{width:28px;height:28px;background:var(--bg4);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gray2);flex-shrink:0;margin-top:2px;}
+.post-item-info{flex:1;}
+.post-item-info .pi-top{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.post-item-info .pi-tema{font-size:13px;font-weight:600;}
+.post-item-info .pi-meta{font-size:11px;color:var(--gray2);}
+.post-item-acts{display:flex;gap:6px;flex-shrink:0;}
+.icon-btn{width:28px;height:28px;border-radius:7px;border:1px solid var(--bg4);background:var(--bg4);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray);transition:all .15s;}
+.icon-btn:hover{border-color:var(--green);color:var(--green);}
+.icon-btn.del:hover{border-color:var(--red);color:var(--red);}
+.no-posts{text-align:center;padding:2rem;color:var(--gray2);font-size:13px;background:var(--bg3);border:1px dashed var(--bg4);border-radius:10px;}
+
+/* CALENDÁRIO */
+.cal-wrap{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);overflow:hidden;margin-bottom:1rem;}
+.cal-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--bg4);}
+.cal-header h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.cal-nav{display:flex;gap:6px;}
+.cal-nav-btn{background:var(--bg3);border:1px solid var(--bg4);border-radius:7px;padding:5px 10px;color:var(--gray);cursor:pointer;font-size:12px;transition:all .15s;}
+.cal-nav-btn:hover{color:var(--white);border-color:var(--green);}
+.cal-days-hdr{display:grid;grid-template-columns:repeat(7,1fr);background:var(--bg3);border-bottom:1px solid var(--bg4);}
+.cal-day-name{font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--gray2);text-transform:uppercase;text-align:center;padding:8px 0;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
+.cal-cell{min-height:80px;border-right:1px solid var(--bg4);border-bottom:1px solid var(--bg4);padding:6px;position:relative;}
+.cal-cell:nth-child(7n){border-right:none;}
+.cal-cell.other-month{opacity:.35;}
+.cal-cell.today .cal-date{background:var(--green);color:#000;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
+.cal-date{font-size:11px;font-weight:600;color:var(--gray2);margin-bottom:4px;width:22px;text-align:center;}
+.cal-post{font-size:10px;font-weight:600;padding:2px 5px;border-radius:4px;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .15s;}
+.cal-post:hover{opacity:.75;}
+.cal-post.reels{background:#e74c3c22;color:#e74c3c;border-left:2px solid #e74c3c;}
+.cal-post.foto{background:#f39c1222;color:#f39c12;border-left:2px solid #f39c12;}
+.cal-post.arte{background:#3498db22;color:#3498db;border-left:2px solid #3498db;}
+.cal-post.carrossel{background:#9b59b622;color:#9b59b6;border-left:2px solid #9b59b6;}
+.cal-more{font-size:9px;color:var(--gray2);cursor:pointer;}
+
+/* INFO CLIENTE */
+.info-card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);overflow:hidden;margin-bottom:1rem;}
+.info-card-hdr{padding:1rem 1.25rem;border-bottom:1px solid var(--bg4);display:flex;align-items:center;justify-content:space-between;}
+.info-card-hdr h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;}
+.info-card-body{padding:1.25rem;}
+.info-row{display:flex;gap:8px;margin-bottom:8px;font-size:13px;}
+.info-lbl{color:var(--gray2);min-width:120px;font-size:12px;}
+.info-val{color:var(--white);flex:1;}
+.color-swatch{width:14px;height:14px;border-radius:3px;display:inline-block;vertical-align:middle;margin-right:6px;border:1px solid rgba(255,255,255,.1);}
+.info-section{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--bg4);}
+.info-section h4{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--green);text-transform:uppercase;margin-bottom:8px;}
 
 /* CLIENTES */
 .client-row{display:flex;align-items:center;gap:14px;padding:1rem 1.25rem;background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);margin-bottom:10px;}
@@ -148,19 +190,36 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .client-name{font-size:14px;font-weight:600;margin-bottom:2px;}
 .client-email{font-size:12px;color:var(--gray2);}
 
-/* SYNC */
-.sync-dot{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;background:rgba(46,204,113,.1);color:#2ECC71;border:1px solid rgba(46,204,113,.25);}
-.pulse{width:7px;height:7px;border-radius:50%;background:#2ECC71;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+/* BACK BTN */
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--gray2);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;padding:0;margin-bottom:1.25rem;transition:color .15s;}
+.back-btn:hover{color:var(--white);}
+
+/* DETAIL */
+.detail-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap;}
+.detail-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:3px;}
+.detail-sub{font-size:13px;color:var(--gray2);}
+.detail-chips{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.comment-text{font-size:12px;color:var(--amber);font-style:italic;}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--bg3);border:1px solid var(--bg4);padding:10px 20px;border-radius:99px;font-size:13px;color:var(--white);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:999;}
+.toast.show{transform:translateX(-50%) translateY(0);}
 
 /* LOADING */
 .loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:3rem;color:var(--gray2);font-size:13px;}
 .spin{width:16px;height:16px;border:2px solid var(--bg4);border-top-color:var(--green);border-radius:50%;animation:spin .6s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* TOAST */
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--bg3);border:1px solid var(--bg4);padding:10px 20px;border-radius:99px;font-size:13px;color:var(--white);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:999;}
-.toast.show{transform:translateX(-50%) translateY(0);}
+/* VIEWS TABS (Radares) */
+.view-tabs{display:flex;gap:4px;margin-bottom:1rem;}
+.view-tab{font-size:12px;font-weight:600;padding:7px 16px;border-radius:8px;border:1px solid var(--bg4);background:none;color:var(--gray2);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;display:flex;align-items:center;gap:6px;}
+.view-tab:hover{color:var(--white);background:var(--bg3);}
+.view-tab.active{background:var(--gbg);color:var(--green);border-color:var(--gborder);}
+
+/* SYNC */
+.sync-dot{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;background:rgba(46,204,113,.1);color:#2ECC71;border:1px solid rgba(46,204,113,.25);}
+.pulse{width:7px;height:7px;border-radius:50%;background:#2ECC71;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 @media(max-width:768px){.sidebar{display:none;}.main{margin-left:0;}}
 </style>
@@ -171,7 +230,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
 <div class="screen on" id="s-login">
   <div class="login-page">
     <div class="login-card">
-      <div class="login-logo">JG Design</div>
+      <img src="https://jg-design-07.github.io/jg-radar-teste/assets/logo.png" class="login-logo-img" alt="JG Design">
       <div class="login-sep"></div>
       <div class="login-title">Painel da Agência</div>
       <div class="login-sub">Acesso restrito — JG Design</div>
@@ -185,32 +244,27 @@ tr:hover td{background:rgba(255,255,255,.02);}
 
 <!-- APP -->
 <div class="screen" id="s-app">
-  <div class="app-layout">
-
+  <div class="app-wrap">
     <!-- SIDEBAR -->
     <div class="sidebar">
-      <div class="sidebar-logo">
-        <h1>JG Design</h1>
-        <p>Painel da agência</p>
+      <div class="sidebar-top">
+        <img src="https://jg-design-07.github.io/jg-radar-teste/assets/logo.png" class="sidebar-logo" alt="JG">
+        <div class="sidebar-brand"><h1>JG Design</h1><p>Painel da agência</p></div>
       </div>
       <nav class="nav">
         <button class="nav-item active" id="nav-dash" onclick="goView('dash')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-          Dashboard
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard
         </button>
         <button class="nav-item" id="nav-radares" onclick="goView('radares')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          Radares
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Radares
         </button>
         <button class="nav-item" id="nav-clientes" onclick="goView('clientes')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Clientes
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clientes
         </button>
       </nav>
       <div class="sidebar-foot">
-        <button class="logout" onclick="doLogout()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          Sair
+        <button class="logout-btn" onclick="doLogout()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair
         </button>
       </div>
     </div>
@@ -220,10 +274,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
 
       <!-- DASHBOARD -->
       <div id="view-dash">
-        <div class="main-header">
-          <h2>Dashboard</h2>
-          <div class="sync-dot"><span class="pulse"></span>GitHub</div>
-        </div>
+        <div class="main-hdr"><h2>Dashboard</h2><div class="sync-dot"><span class="pulse"></span>Ao vivo</div></div>
         <div class="content">
           <div class="metrics" id="metrics"></div>
           <div class="sec-lbl">Clientes</div>
@@ -235,21 +286,46 @@ tr:hover td{background:rgba(255,255,255,.02);}
 
       <!-- RADARES -->
       <div id="view-radares" style="display:none">
-        <div class="main-header">
+        <div class="main-hdr">
           <h2 id="radares-title">Todos os radares</h2>
-          <button class="btn btn-ghost" id="btn-filtro-clear" onclick="clearFilter()" style="display:none">✕ Limpar filtro</button>
+          <button class="btn btn-ghost" id="btn-clear-filter" onclick="clearFilter()" style="display:none">✕ Limpar filtro</button>
           <button class="btn btn-primary" onclick="openNewRadar()">+ Novo radar</button>
         </div>
         <div class="content">
-          <div class="radar-list" id="radares-list"></div>
+          <div class="view-tabs">
+            <button class="view-tab active" id="tab-lista" onclick="setRadarTab('lista')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Lista
+            </button>
+            <button class="view-tab" id="tab-cal" onclick="setRadarTab('calendario')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendário
+            </button>
+          </div>
+          <div id="radares-lista"><div class="radar-list" id="radares-list"></div></div>
+          <div id="radares-cal" style="display:none" >
+            <div class="cal-wrap">
+              <div class="cal-header">
+                <h3 id="cal-title">Maio 2026</h3>
+                <div class="cal-nav">
+                  <button class="cal-nav-btn" onclick="calNav(-1)">← Anterior</button>
+                  <button class="cal-nav-btn" onclick="calNav(0)">Hoje</button>
+                  <button class="cal-nav-btn" onclick="calNav(1)">Próximo →</button>
+                </div>
+              </div>
+              <div class="cal-days-hdr">
+                <div class="cal-day-name">Dom</div><div class="cal-day-name">Seg</div>
+                <div class="cal-day-name">Ter</div><div class="cal-day-name">Qua</div>
+                <div class="cal-day-name">Qui</div><div class="cal-day-name">Sex</div>
+                <div class="cal-day-name">Sáb</div>
+              </div>
+              <div class="cal-grid" id="cal-grid"></div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- DETALHE RADAR -->
       <div id="view-detail" style="display:none">
-        <div class="main-header">
-          <h2 id="detail-hdr-title">Respostas do radar</h2>
-        </div>
+        <div class="main-hdr"><h2 id="detail-hdr-title">Respostas do radar</h2></div>
         <div class="content">
           <button class="back-btn" onclick="goView('radares')">← Voltar</button>
           <div id="detail-content"></div>
@@ -258,466 +334,709 @@ tr:hover td{background:rgba(255,255,255,.02);}
 
       <!-- CLIENTES -->
       <div id="view-clientes" style="display:none">
-        <div class="main-header">
-          <h2>Clientes</h2>
-          <button class="btn btn-primary" onclick="openNewCliente()">+ Novo cliente</button>
-        </div>
-        <div class="content">
-          <div id="clientes-list"></div>
-        </div>
+        <div class="main-hdr"><h2>Clientes</h2><button class="btn btn-primary" onclick="openNewCliente()">+ Novo cliente</button></div>
+        <div class="content" id="clientes-content"></div>
       </div>
 
-    </div><!-- /main -->
-  </div>
-</div>
-
-<!-- MODAL NOVO RADAR -->
-<div class="overlay" id="ov-radar" onclick="if(event.target===this)closeModal('ov-radar')">
-  <div class="modal">
-    <h3>Novo radar</h3>
-    <div class="m-form-grid" style="margin-bottom:12px">
-      <div class="m-field">
-        <label>Cliente</label>
-        <select id="nr-cliente"></select>
-      </div>
-      <div class="m-field">
-        <label>Nome do radar</label>
-        <input type="text" id="nr-nome" placeholder="ex: Radar Junho 2026">
-      </div>
-    </div>
-    <div class="m-form-grid" style="margin-bottom:12px">
-      <div class="m-field">
-        <label>Período início</label>
-        <input type="date" id="nr-start">
-      </div>
-      <div class="m-field">
-        <label>Período fim</label>
-        <input type="date" id="nr-end">
-      </div>
-    </div>
-    <div class="modal-acts">
-      <button class="btn btn-ghost" onclick="closeModal('ov-radar')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveNewRadar()">Criar radar</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL NOVO CLIENTE -->
-<div class="overlay" id="ov-cliente" onclick="if(event.target===this)closeModal('ov-cliente')">
-  <div class="modal">
-    <h3>Novo cliente</h3>
-    <div class="m-form-grid full" style="margin-bottom:12px">
-      <div class="m-field"><label>Nome</label><input type="text" id="nc-nome" placeholder="Nome do cliente ou empresa"></div>
+<!-- MODAL: NOVO RADAR -->
+<div class="overlay" id="ov-radar" onclick="if(event.target===this)closeOv('ov-radar')">
+<div class="modal" style="max-width:700px">
+  <h3>🛰 Novo radar</h3>
+  <!-- Step 1: Info básica -->
+  <div class="form-grid">
+    <div class="form-field"><label>Cliente</label><select id="nr-cliente"></select></div>
+    <div class="form-field"><label>Nome do radar</label><input type="text" id="nr-nome" placeholder="ex: Radar Junho 2026"></div>
+  </div>
+  <div class="form-grid">
+    <div class="form-field"><label>Período início</label><input type="date" id="nr-start"></div>
+    <div class="form-field"><label>Período fim</label><input type="date" id="nr-end"></div>
+  </div>
+
+  <!-- Posts builder -->
+  <div class="posts-builder">
+    <div class="posts-builder-hdr">
+      <h4>Postagens</h4>
+      <button class="btn btn-primary" style="font-size:11px;padding:5px 12px" onclick="openNewPost()">+ Adicionar post</button>
     </div>
-    <div class="m-form-grid" style="margin-bottom:12px">
-      <div class="m-field"><label>Email de acesso</label><input type="email" id="nc-email" placeholder="cliente@email.com"></div>
-      <div class="m-field"><label>Senha de acesso</label><input type="text" id="nc-senha" placeholder="ex: cliente2026"></div>
+    <div id="posts-list-builder">
+      <div class="no-posts">Nenhuma postagem adicionada ainda.<br>Clique em "+ Adicionar post" para começar.</div>
     </div>
-    <div class="modal-acts">
-      <button class="btn btn-ghost" onclick="closeModal('ov-cliente')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveNewCliente()">Criar cliente</button>
-    </div>
+  </div>
+
+  <div class="modal-acts">
+    <button class="btn btn-ghost" onclick="closeOv('ov-radar')">Cancelar</button>
+    <button class="btn btn-primary" onclick="saveNewRadar()">Criar radar</button>
   </div>
 </div>
+</div>
 
-<!-- MODAL EDITAR CLIENTE -->
-<div class="overlay" id="ov-edit-cliente" onclick="if(event.target===this)closeModal('ov-edit-cliente')">
-  <div class="modal">
-    <h3>Editar cliente</h3>
-    <input type="hidden" id="ec-id">
-    <div class="m-form-grid full" style="margin-bottom:12px">
-      <div class="m-field"><label>Nome</label><input type="text" id="ec-nome"></div>
+<!-- MODAL: NOVO/EDITAR POST -->
+<div class="overlay" id="ov-post" onclick="if(event.target===this)closeOv('ov-post')">
+<div class="modal">
+  <h3 id="post-modal-title">📝 Nova postagem</h3>
+  <input type="hidden" id="post-edit-idx" value="-1">
+  <div class="form-grid">
+    <div class="form-field"><label>Tipo</label>
+      <select id="post-tipo">
+        <option>Reels</option><option>Foto</option><option>Arte</option><option>Carrossel</option>
+      </select>
     </div>
-    <div class="m-form-grid" style="margin-bottom:12px">
-      <div class="m-field"><label>Email de acesso</label><input type="email" id="ec-email"></div>
-      <div class="m-field"><label>Nova senha (deixe em branco para manter)</label><input type="text" id="ec-senha" placeholder="••••••••"></div>
-    </div>
-    <div class="modal-acts">
-      <button class="btn btn-ghost" onclick="closeModal('ov-edit-cliente')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveEditCliente()">Salvar</button>
+    <div class="form-field"><label>Objetivo</label>
+      <select id="post-obj"><option>Hero</option><option>Hub</option><option>Help</option></select>
     </div>
   </div>
+  <div class="form-grid">
+    <div class="form-field"><label>Data de publicação</label><input type="date" id="post-data"></div>
+    <div class="form-field"><label>Horário</label><input type="time" id="post-hora" value="12:00"></div>
+  </div>
+  <div class="form-grid full">
+    <div class="form-field"><label>Tema / Título</label><input type="text" id="post-tema" placeholder="ex: Salvo Intense"></div>
+  </div>
+  <div class="form-grid full">
+    <div class="form-field">
+      <label>Link do criativo (Google Drive, Canva, etc.)</label>
+      <input type="url" id="post-criativo" placeholder="https://drive.google.com/...">
+    </div>
+  </div>
+  <div class="form-grid full">
+    <div class="form-field">
+      <label>Legenda</label>
+      <textarea id="post-legenda" placeholder="Digite a legenda completa da postagem..." style="min-height:120px"></textarea>
+    </div>
+  </div>
+  <div class="modal-acts">
+    <button class="btn btn-ghost" onclick="closeOv('ov-post')">Cancelar</button>
+    <button class="btn btn-primary" onclick="savePost()">Salvar post</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: NOVO CLIENTE -->
+<div class="overlay" id="ov-cliente" onclick="if(event.target===this)closeOv('ov-cliente')">
+<div class="modal">
+  <h3>👤 Novo cliente</h3>
+  <div class="form-grid full"><div class="form-field"><label>Nome</label><input type="text" id="nc-nome" placeholder="Nome do cliente ou empresa"></div></div>
+  <div class="form-grid">
+    <div class="form-field"><label>Email de acesso</label><input type="email" id="nc-email" placeholder="cliente@email.com"></div>
+    <div class="form-field"><label>Senha de acesso</label><input type="text" id="nc-senha" placeholder="ex: cliente2026"></div>
+  </div>
+  <div class="modal-acts">
+    <button class="btn btn-ghost" onclick="closeOv('ov-cliente')">Cancelar</button>
+    <button class="btn btn-primary" onclick="saveNewCliente()">Criar cliente</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: EDITAR CLIENTE -->
+<div class="overlay" id="ov-edit-cliente" onclick="if(event.target===this)closeOv('ov-edit-cliente')">
+<div class="modal">
+  <h3>✏️ Editar cliente</h3>
+  <input type="hidden" id="ec-id">
+  <div class="form-grid full"><div class="form-field"><label>Nome</label><input type="text" id="ec-nome"></div></div>
+  <div class="form-grid">
+    <div class="form-field"><label>Email</label><input type="email" id="ec-email"></div>
+    <div class="form-field"><label>Nova senha (deixe em branco para manter)</label><input type="text" id="ec-senha" placeholder="••••••••"></div>
+  </div>
+  <div class="modal-acts">
+    <button class="btn btn-ghost" onclick="closeOv('ov-edit-cliente')">Cancelar</button>
+    <button class="btn btn-primary" onclick="saveEditCliente()">Salvar</button>
+  </div>
+</div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const REPO = 'jg-design-07/jg-radar-teste';
-const API  = 'https://api.github.com';
-const T    = 'ghp_kqvPFAM7yA' + 'kKD9nJWJB0dG8AymOvWq2m2pcf';
+const REPO    = 'jg-design-07/jg-radar-teste';
+const API     = 'https://api.github.com';
+const T       = 'ghp_kqvPFAM7yA' + 'kKD9nJWJB0dG8AymOvWq2m2pcf';
+const ADMIN   = { email:'jgdesign07@gmail.com', senha:'jgdesign2024' };
+const CL_URL  = 'https://jg-design-07.github.io/jg-radar-teste';
+const LOGO    = 'https://jg-design-07.github.io/jg-radar-teste/assets/logo.png';
 
-// Credenciais da agência
-const ADMIN = { email: 'jgdesign07@gmail.com', senha: 'jgdesign2024' };
-const CLIENT_URL = 'https://radar.jgdesign.com.br';
+// Info dos clientes (do Notion)
+const CLIENT_INFO = {
+  oceano: {
+    nome: 'Oceano Perfumes',
+    slogan: 'Escolha como você quer ser lembrada.',
+    localizacao: 'Guarulhos – SP (Jardim São Francisco)',
+    segmento: 'Boutique de perfumes importados',
+    ticket: 'R$300 a R$2.000',
+    cores: [{nome:'Azul Petróleo',hex:'#0D2F3F'},{nome:'Azul Pacífico',hex:'#2F5F73'},{nome:'Bege Cerúleo',hex:'#E7E1D5'},{nome:'Dourado',hex:'#C9A86A'}],
+    tipografia: 'League Spartan (títulos) + DM Sans (textos)',
+    tom: 'Elegante, acolhedor, feminino, sensorial e sofisticado',
+    arquétipo: 'Elegante / Curadora',
+    diferenciais: 'Atendimento consultivo, experiência boutique, curadoria de marcas (Paco Rabanne, Carolina Herrera, Givenchy, árabes)',
+    drive: 'https://drive.google.com/drive/folders/1yQB89KXNdaP4LbaR-U3jONkn8mCy06AD',
+    instagram: '@oceanoperfumes',
+    icp: 'Mulheres 25–45 anos, Guarulhos, Classe média/média-alta, compra 2–4 perfumes/ano'
+  }
+};
 
-let S = { clientes: [], radares: [], respostas: {}, currentFilter: null };
+let S = { radares: [], clientes: [], respostas: {}, filterClient: null };
+let NEW_POSTS = []; // posts sendo criados no modal
+let CAL = { year: new Date().getFullYear(), month: new Date().getMonth() };
 
 /* ── UTILS ── */
-function show(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('on')); document.getElementById(id).classList.add('on'); }
-function toast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 3000); }
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); }
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3000); }
+function openOv(id){ document.getElementById(id).classList.add('open'); }
+function closeOv(id){ document.getElementById(id).classList.remove('open'); }
+function tipoClass(t){ return {Reels:'reels',Foto:'foto',Arte:'arte',Carrossel:'carrossel'}[t]||'arte'; }
 
 /* ── GITHUB ── */
-// Dados embutidos (leitura) — sem fetch, sem atob, sem encoding issues
-let _DB_RADARES = [{"id":"oceano-2026-05-12_2026-06-02","clientId":"oceano","clientName":"Oceano Perfumes","name":"Radar Maio — Junho 2026","period":"12/05 – 02/06/2026","start":"2026-05-12","end":"2026-06-02","year":"2026","posts":[{"idx":0,"data":"TER 12/05","tipo":"Reels","obj":"Help","tema":"Onde aplicar perfume para durar mais","legenda":"Seu perfume não fixa como deveria?<br>Talvez o problema não seja o perfume.<br><br>A forma como você aplica faz toda a diferença na duração e projeção da fragrância.<br><br>✔️ Prefira áreas quentes<br>✔️ Aplique na pele<br>✔️ Evite esfregar após borrifar<br><br>Pequenos detalhes mudam completamente a experiência.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1kHe9zl6xRDSrKA45w6ofhPzIsHRXmfyS/view","driveId":"1kHe9zl6xRDSrKA45w6ofhPzIsHRXmfyS","isVideo":true,"isCanva":false},{"idx":1,"data":"QUA 13/05","tipo":"Reels","obj":"Hero","tema":"Decants Oceano","legenda":"Quer conhecer perfumes incríveis… sem precisar investir no frasco inteiro? ✨<br><br>Os decants são a forma perfeita de:<br><br>✔️ testar antes de comprar<br>✔️ conhecer novas fragrâncias<br>✔️ ter mais opções no dia a dia<br>✔️ levar seu perfume favorito para qualquer lugar<br><br>Mais praticidade.<br>Mais possibilidades.<br>Menos arrependimento.<br><br>🌊 Decants disponíveis na Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1aotQdm7Gk9PPvluxNEBUhIyFv4iGzzTD/view","driveId":"1aotQdm7Gk9PPvluxNEBUhIyFv4iGzzTD","isVideo":true,"isCanva":false},{"idx":2,"data":"QUI 14/05","tipo":"Foto","obj":"Hero","tema":"Salvo Intense","legenda":"Intenso desde a primeira borrifada. 🔥<br>O Salvo Intense é para quem gosta de fragrâncias marcantes, sofisticadas e com presença forte.<br>Um perfume masculino que transmite confiança, elegância e personalidade sem esforço.<br>Perfeito para quem quer ser notado… e lembrado.<br>🌊 Oceano Perfumes<br><br>Escolha como você quer ser lembrado.<br>💬 Chame no WhatsApp para conhecer essa fragrância<br><br>📍 Disponível na loja","criativo":"https://drive.google.com/file/d/1MCzHPoVn8kNpXzs36afnoC9fJbZHpwPh/view","driveId":"1MCzHPoVn8kNpXzs36afnoC9fJbZHpwPh","isVideo":false,"isCanva":false},{"idx":3,"data":"SEX 15/05","tipo":"Foto","obj":"Hero","tema":"Dalal Lattafa","legenda":"Delicado na primeira impressão.<br><br>Marcante na memória. ✨<br>O Dalal Lattafa mistura doçura, sofisticação e presença em uma fragrância envolvente e elegante.<br>Perfeito para quem gosta de perfumes femininos que chamam atenção sem exagerar.<br>🌊 Oceano Perfumes<br><br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1Wg-_aon3S-FoYz0sPo2IiXKRXMyaRQhl/view","driveId":"1Wg-_aon3S-FoYz0sPo2IiXKRXMyaRQhl","isVideo":false,"isCanva":false},{"idx":4,"data":"SÁB 16/05","tipo":"Arte","obj":"Hub","tema":"Avaliação","legenda":"Cada experiência importa. 🌊<br>Na Oceano, acreditamos que escolher um perfume vai muito além da compra.<br>É sobre atendimento, cuidado e encontrar a fragrância certa para cada momento.<br>Feedbacks como esse mostram que estamos no caminho certo — e nos motivam a entregar uma experiência ainda melhor todos os dias.<br>✨ Obrigado pela confiança.<br>💬 Já viveu a experiência Oceano?<br><br>Sua avaliação faz toda a diferença pra gente.","criativo":"https://canva.link/3g774rufnr7rxab","driveId":null,"isVideo":false,"isCanva":true},{"idx":5,"data":"TER 19/05","tipo":"Reels","obj":"Hero","tema":"Entregamos em Guarulhos e Região","legenda":"Seu perfume favorito, sem precisar sair de casa. 🌊<br><br>Na Oceano Perfumes, você escolhe sua fragrância ideal e a gente entrega até você.<br><br>✨ Perfumes importados<br>✨ Kits especiais<br>✨ Fragrâncias femininas e masculinas<br>✨ Entrega em Guarulhos e região<br><br>Mais praticidade para encontrar o perfume que combina com você.<br><br>💬 Chame no WhatsApp e faça seu pedido<br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1rThZC-dtM6wMl2DI98iVclSMURLKijcr/view","driveId":"1rThZC-dtM6wMl2DI98iVclSMURLKijcr","isVideo":true,"isCanva":false},{"idx":6,"data":"QUA 20/05","tipo":"Foto","obj":"Hero","tema":"Ayka Rahyaan","legenda":"Delicado, feminino e cheio de personalidade ✨<br><br>O Ayka Rayhaan é aquele perfume que combina suavidade com presença na medida certa.<br><br>Uma fragrância elegante, envolvente e perfeita para quem gosta de deixar uma impressão leve… mas inesquecível.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>💬 Chame no WhatsApp para conhecer essa fragrância<br>📍 Disponível na loja","criativo":"https://drive.google.com/file/d/1ien2rXCI8I7Pm-KkYE-eXJ11XNKJfcDn/view","driveId":"1ien2rXCI8I7Pm-KkYE-eXJ11XNKJfcDn","isVideo":false,"isCanva":false},{"idx":7,"data":"QUI 21/05","tipo":"Reels","obj":"Hero","tema":"Club de Nuit Intense Man","legenda":"Não é o tipo de perfume que passa despercebido. 🔥<br><br>O Club de Nuit Intense Man foi feito para homens que gostam de presença, sofisticação e impacto.<br><br>Uma fragrância intensa, marcante e elegante na medida certa.<br><br>Perfume para quem entra… e naturalmente chama atenção.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>💬 Chame no WhatsApp para conhecer essa fragrância<br>📍 Disponível na loja","criativo":"https://drive.google.com/file/d/16xPiIAk9t6vtVskLW14ZNLRF5g2hg2fV/view","driveId":"16xPiIAk9t6vtVskLW14ZNLRF5g2hg2fV","isVideo":true,"isCanva":false},{"idx":8,"data":"SÁB 23/05","tipo":"Foto","obj":"Hero","tema":"Decante","legenda":"Mais fragrâncias.<br>Mais possibilidades. ✨<br><br>Os decants são perfeitos para quem quer conhecer novos perfumes, testar antes de investir ou ter sua fragrância favorita sempre por perto.<br><br>Pequenos no tamanho.<br>Gigantes na experiência.<br><br>🌊 Decants disponíveis na Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>💬 Chame no WhatsApp para consultar as fragrâncias disponíveis","criativo":"https://drive.google.com/file/d/11EL3pLaT3aOZfjwfbi5_sTPPWJ7CwGcY/view","driveId":"11EL3pLaT3aOZfjwfbi5_sTPPWJ7CwGcY","isVideo":false,"isCanva":false},{"idx":9,"data":"TER 26/05","tipo":"Foto","obj":"Hero","tema":"Spectre Ghost","legenda":"Intenso, sofisticado e impossível de ignorar. 🖤<br><br>O Spectre Ghost é para quem gosta de presença forte, elegância marcante e fragrâncias que deixam impressão por onde passam.<br><br>Um perfume que não pede atenção.<br>Ele naturalmente recebe.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>📦 Enviamos para todo o Brasil","criativo":"https://drive.google.com/file/d/1Y2Rsrfw1qw5m4jzZzf_dNpJ8MOGao5ra/view","driveId":"1Y2Rsrfw1qw5m4jzZzf_dNpJ8MOGao5ra","isVideo":false,"isCanva":false},{"idx":10,"data":"QUA 27/05","tipo":"Reels","obj":"Hub","tema":"Muito além de uma perfumaria","legenda":"A Oceano nasceu para ser mais do que uma perfumaria. 🌊<br><br>Aqui, cada fragrância carrega presença, personalidade e memória.<br><br>Mais do que escolher um perfume, queremos que você viva uma experiência, da descoberta da fragrância até a forma como ela faz você se sentir.","criativo":"https://drive.google.com/file/d/1aWa9n1qW2Av35vC5GMH5Y1mULLvOkTs9/view","driveId":"1aWa9n1qW2Av35vC5GMH5Y1mULLvOkTs9","isVideo":true,"isCanva":false},{"idx":11,"data":"SÁB 30/05","tipo":"Foto","obj":"Hub","tema":"Em breve novidades","legenda":"O que estamos construindo vai muito além de perfumes. ✨<br><br>A Oceano está crescendo, evoluindo e preparando novidades especiais para tornar sua experiência ainda mais única.<br><br>Em breve, uma nova fase começa por aqui. 🌊<br><br>Fiquem ligados.<br>O melhor ainda está por vir.<br><br>💙 Oceano Perfumes","criativo":"https://drive.google.com/file/d/1BKceHuhNOTLWiQFOWIH8n6rTIWsK0rHL/view","driveId":"1BKceHuhNOTLWiQFOWIH8n6rTIWsK0rHL","isVideo":false,"isCanva":false},{"idx":12,"data":"SEG 01/06","tipo":"Carrossel","obj":"Help","tema":"Perfume caro não significa perfume melhor","legenda":"Perfume não é competição de preço.<br>É conexão. ✨<br><br>O perfume certo não é o mais caro da prateleira.<br>É aquele que combina com sua presença, sua personalidade e a forma como você quer ser lembrado.<br><br>Na Oceano, acreditamos que fragrância boa é a que faz sentido pra você — não pro status.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://canva.link/17n5bi1nkrotckx","driveId":null,"isVideo":false,"isCanva":true},{"idx":13,"data":"TER 02/06","tipo":"Foto","obj":"Hero","tema":"9am Dive","legenda":"Fresco, elegante e cheio de personalidade. 💙<br><br>O 9am Dive é aquele perfume que transmite leveza sem perder presença.<br><br>Uma fragrância versátil, moderna e perfeita para quem gosta de se destacar de forma natural.<br><br>Ideal para o dia a dia, mas marcante o suficiente para ser lembrado.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>📦 Enviamos para todo o Brasil","criativo":"https://drive.google.com/file/d/1d3CsGoNiHVnoR0BxkFs1wm5Y6dxlhuct/view","driveId":"1d3CsGoNiHVnoR0BxkFs1wm5Y6dxlhuct","isVideo":false,"isCanva":false}]}];
-let _DB_CLIENTES = [{"id":"oceano","name":"Oceano Perfumes","email":"oceano@email.com","senha":"oceano2026"},{"id":"veza","name":"Veza Burger","email":"veza@email.com","senha":"veza2026"}];
-async function ghGet(path) {
-  // Para leitura: retorna dados embutidos
-  if (path === 'data/radares.json') {
-    const sha = await ghGetSha(path);
-    return { data: _DB_RADARES, sha };
-  }
-  if (path === 'data/clientes.json') {
-    const sha = await ghGetSha(path);
-    return { data: _DB_CLIENTES, sha };
-  }
-  throw new Error('path: ' + path);
-}
-async function ghGetSha(path) {
-  try {
-    const r = await fetch(API+'/repos/'+REPO+'/contents/'+path, {headers:{Authorization:'token '+T,Accept:'application/vnd.github+json'}});
-    if (r.ok) { const d = await r.json(); return d.sha; }
-  } catch(e) {}
+async function ghGetSha(path){
+  try{
+    const r=await fetch(API+'/repos/'+REPO+'/contents/'+path,{headers:{Authorization:'token '+T,Accept:'application/vnd.github+json'}});
+    if(r.ok){const d=await r.json();return d.sha;}
+  }catch(e){}
   return null;
 }
-async function ghPut(path, data, sha) {
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-  const body = { message: 'Update ' + path, content };
-  if (sha) body.sha = sha;
-  const r = await fetch(API + '/repos/' + REPO + '/contents/' + path, { method: 'PUT', headers: { Authorization: 'token ' + T, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json' }, body: JSON.stringify(body) });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
+async function ghPut(path,data,sha){
+  const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+  const body={message:'Update '+path,content};
+  if(sha)body.sha=sha;
+  const r=await fetch(API+'/repos/'+REPO+'/contents/'+path,{method:'PUT',headers:{Authorization:'token '+T,'Content-Type':'application/json',Accept:'application/vnd.github+json'},body:JSON.stringify(body)});
+  if(!r.ok)throw new Error('HTTP '+r.status);
   return r.json();
 }
-async function ghIssues() {
-  const r = await fetch(API + '/repos/' + REPO + '/issues?labels=radar-resposta&state=open&per_page=100', { headers: { Authorization: 'token ' + T, Accept: 'application/vnd.github+json' } });
-  if (!r.ok) return [];
-  return r.json();
+async function ghIssues(){
+  try{
+    const r=await fetch(API+'/repos/'+REPO+'/issues?labels=radar-resposta&state=open&per_page=100',{headers:{Authorization:'token '+T,Accept:'application/vnd.github+json'}});
+    if(!r.ok)return [];
+    return r.json();
+  }catch(e){return [];}
 }
 
 /* ── AUTH ── */
-function doLogin() {
-  const email = document.getElementById('l-email').value.trim().toLowerCase();
-  const senha = document.getElementById('l-senha').value;
-  const err   = document.getElementById('l-err');
-  if (email === ADMIN.email.toLowerCase() && senha === ADMIN.senha) {
-    err.style.display = 'none';
-    sessionStorage.setItem('jg_admin', '1');
-    show('s-app');
-    initApp();
-  } else {
-    err.style.display = 'block';
-  }
+function doLogin(){
+  const email=document.getElementById('l-email').value.trim().toLowerCase();
+  const senha=document.getElementById('l-senha').value;
+  const err=document.getElementById('l-err');
+  if(email===ADMIN.email.toLowerCase()&&senha===ADMIN.senha){
+    err.style.display='none';
+    sessionStorage.setItem('jg_admin','1');
+    show('s-app'); initApp();
+  }else{ err.style.display='block'; }
 }
-function doLogout() { sessionStorage.removeItem('jg_admin'); show('s-login'); }
-document.getElementById('l-senha').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-if (sessionStorage.getItem('jg_admin')) { show('s-app'); initApp(); }
+function doLogout(){ sessionStorage.removeItem('jg_admin'); show('s-login'); }
+document.getElementById('l-senha').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+if(sessionStorage.getItem('jg_admin')){ show('s-app'); initApp(); }
 
 /* ── INIT ── */
-async function initApp() {
-  try {
-    const [cl, rd] = await Promise.all([ghGet('data/clientes.json'), ghGet('data/radares.json')]);
-    S.clientes = cl.data; S._clSha = cl.sha;
-    S.radares  = rd.data; S._rdSha = rd.sha;
-    const issues = await ghIssues();
-    parseRespostas(issues);
-    renderDash();
-    renderRadares();
-    renderClientes();
-  } catch(e) { toast('Erro ao carregar dados: ' + e.message); }
+async function initApp(){
+  // Dados embutidos
+  S.radares  = _DB_RADARES;
+  S.clientes = _DB_CLIENTES;
+  const issues = await ghIssues();
+  parseResp(issues);
+  renderDash(); renderRadares(); renderClientes();
 }
 
-function parseRespostas(issues) {
-  S.respostas = {};
-  for (const issue of issues) {
-    try {
-      const b = JSON.parse(issue.body);
-      const key = b.radarId + '__' + b.postIndex;
-      if (!S.respostas[key] || new Date(b.ts) > new Date(S.respostas[key].ts))
-        S.respostas[key] = b;
-    } catch(e) {}
+function parseResp(issues){
+  S.respostas={};
+  for(const i of issues){
+    try{
+      const b=JSON.parse(i.body);
+      const k=b.radarId+'__'+b.postIndex;
+      if(!S.respostas[k]||new Date(b.ts)>new Date(S.respostas[k].ts))S.respostas[k]=b;
+    }catch(e){}
   }
 }
+function getStatus(rid,idx){return S.respostas[rid+'__'+idx]?.status||'aguardando';}
+function getComment(rid,idx){return S.respostas[rid+'__'+idx]?.comment||'';}
 
-function getStatus(radarId, idx) { return S.respostas[radarId + '__' + idx]?.status || 'aguardando'; }
-function getComment(radarId, idx) { return S.respostas[radarId + '__' + idx]?.comment || ''; }
-
-function radarStats(r) {
-  const c = { aprovado:0, reprovado:0, alteracao:0, aguardando:0 };
-  r.posts.forEach(p => { const s = getStatus(r.id, p.idx !== undefined ? p.idx : 0); c[s]++; });
+function radarStats(r){
+  const c={aprovado:0,reprovado:0,alteracao:0,aguardando:0};
+  r.posts.forEach((p,i)=>{const s=getStatus(r.id,p.idx!==undefined?p.idx:i);c[s]++;});
   return c;
 }
-
-function chipsHTML(st) {
+function chipsHTML(st){
   return [
-    st.aprovado  ? '<span class="chip chip-ok">✓ '+st.aprovado+'</span>' : '',
-    st.reprovado ? '<span class="chip chip-no">✗ '+st.reprovado+'</span>' : '',
-    st.alteracao ? '<span class="chip chip-alt">✏ '+st.alteracao+'</span>' : '',
-    st.aguardando? '<span class="chip chip-wait">⏳ '+st.aguardando+'</span>' : '',
+    st.aprovado  ?`<span class="chip chip-ok">✓ ${st.aprovado}</span>`:'',
+    st.reprovado ?`<span class="chip chip-no">✗ ${st.reprovado}</span>`:'',
+    st.alteracao ?`<span class="chip chip-alt">✏ ${st.alteracao}</span>`:'',
+    st.aguardando?`<span class="chip chip-wait">⏳ ${st.aguardando}</span>`:'',
   ].filter(Boolean).join('');
 }
 
 /* ── VIEWS ── */
-function goView(v) {
-  ['dash','radares','detail','clientes'].forEach(id => {
-    const el = document.getElementById('view-' + id);
-    if (el) el.style.display = id === v ? 'block' : 'none';
+function goView(v){
+  ['dash','radares','detail','clientes'].forEach(id=>{
+    const el=document.getElementById('view-'+id);
+    if(el)el.style.display=id===v?'block':'none';
   });
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const nav = document.getElementById('nav-' + v);
-  if (nav) nav.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const nav=document.getElementById('nav-'+v);
+  if(nav)nav.classList.add('active');
 }
 
 /* ── DASHBOARD ── */
-function renderDash() {
-  const allPosts = S.radares.flatMap(r => r.posts.map(p => getStatus(r.id, p.idx !== undefined ? p.idx : 0)));
-  const ap = allPosts.filter(s => s==='aprovado').length;
-  const ag = allPosts.filter(s => s==='aguardando').length;
-  const re = allPosts.filter(s => s==='reprovado').length;
-  const al = allPosts.filter(s => s==='alteracao').length;
+function renderDash(){
+  const all=S.radares.flatMap(r=>r.posts.map((p,i)=>getStatus(r.id,p.idx!==undefined?p.idx:i)));
+  const ap=all.filter(s=>s==='aprovado').length;
+  const ag=all.filter(s=>s==='aguardando').length;
+  const re=all.filter(s=>s==='reprovado').length;
+  document.getElementById('metrics').innerHTML=[
+    ['Clientes',S.clientes.length,''],['Radares',S.radares.length,''],
+    ['Aprovados',ap,'g'],['Aguardando',ag,'a'],
+  ].map(([l,v,c])=>`<div class="metric"><div class="metric-lbl">${l}</div><div class="metric-val ${c}">${v}</div></div>`).join('');
 
-  document.getElementById('metrics').innerHTML = [
-    ['Clientes', S.clientes.length, ''],
-    ['Radares',  S.radares.length, ''],
-    ['Aprovados', ap, 'g'],
-    ['Aguardando', ag, 'a'],
-  ].map(([l,v,c]) => '<div class="metric"><div class="metric-lbl">'+l+'</div><div class="metric-val '+c+'">'+v+'</div></div>').join('');
-
-  document.getElementById('dash-clients').innerHTML = S.clientes.map(cl => {
-    const rads = S.radares.filter(r => r.clientId === cl.id);
-    const posts = rads.flatMap(r => r.posts.map(p => getStatus(r.id, p.idx !== undefined ? p.idx : 0)));
-    const pend = posts.filter(s => s === 'aguardando').length;
-    return '<div class="card" onclick="filterCliente(\''+cl.id+'\')">'+
-      '<div class="card-name">'+cl.name+'</div>'+
-      '<div class="card-sub">'+rads.length+' radar'+(rads.length!==1?'es':'')+' &middot; '+posts.length+' posts</div>'+
-      '<div class="card-chips">'+
-        (pend > 0 ? '<span class="chip chip-wait">⏳ '+pend+' pendente'+(pend!==1?'s':'')+'</span>' : '<span class="chip chip-ok">✓ Tudo revisado</span>')+
-      '</div>'+
-    '</div>';
+  document.getElementById('dash-clients').innerHTML=S.clientes.map(cl=>{
+    const rads=S.radares.filter(r=>r.clientId===cl.id);
+    const posts=rads.flatMap(r=>r.posts.map((p,i)=>getStatus(r.id,p.idx!==undefined?p.idx:i)));
+    const pend=posts.filter(s=>s==='aguardando').length;
+    return `<div class="card" onclick="filterCliente('${cl.id}')">
+      <div class="card-name">${cl.name}</div>
+      <div class="card-sub">${rads.length} radar${rads.length!==1?'es':''} · ${posts.length} posts</div>
+      <div class="card-chips">${pend>0?`<span class="chip chip-wait">⏳ ${pend} pendente${pend!==1?'s':''}</span>`:'<span class="chip chip-ok">✓ Tudo revisado</span>'}</div>
+    </div>`;
   }).join('');
 
-  const recent = [...S.radares].sort((a,b) => b.start.localeCompare(a.start)).slice(0,5);
-  document.getElementById('dash-radares').innerHTML = recent.map(r => renderRadarRow(r)).join('');
+  const recent=[...S.radares].sort((a,b)=>b.start.localeCompare(a.start)).slice(0,5);
+  document.getElementById('dash-radares').innerHTML=recent.map(r=>radarRowHTML(r)).join('');
 }
 
 /* ── RADARES ── */
-function renderRadares() {
-  const filtered = S.currentFilter ? S.radares.filter(r => r.clientId === S.currentFilter) : S.radares;
-  const sorted = [...filtered].sort((a,b) => b.start.localeCompare(a.start));
-  document.getElementById('radares-list').innerHTML = sorted.map(r => renderRadarRow(r)).join('') ||
+function renderRadares(){
+  const filtered=S.filterClient?S.radares.filter(r=>r.clientId===S.filterClient):S.radares;
+  const sorted=[...filtered].sort((a,b)=>b.start.localeCompare(a.start));
+  document.getElementById('radares-list').innerHTML=sorted.map(r=>radarRowHTML(r)).join('')||
     '<div class="loading" style="padding:2rem">Nenhum radar encontrado.</div>';
+  renderCalendario();
 }
 
-function renderRadarRow(r) {
-  const cl = S.clientes.find(c => c.id === r.clientId);
-  const st = radarStats(r);
-  const link = CLIENT_URL + '/?preview=' + r.clientId;
-  return '<div class="radar-row">'+
-    '<div class="radar-row-info">'+
-      '<div class="radar-row-name">'+(cl?.name||r.clientId)+' &mdash; '+(r.name||r.period)+'</div>'+
-      '<div class="radar-row-sub">'+r.period+' &middot; '+r.posts.length+' postagens</div>'+
-      '<div class="radar-row-chips">'+chipsHTML(st)+'</div>'+
-    '</div>'+
-    '<div class="radar-row-acts">'+
-      '<button class="btn btn-primary" onclick="openDetail(\''+r.id+'\')">Ver respostas</button>'+
-      '<a class="btn btn-blue" href="'+link+'" target="_blank">👁 Ver como cliente</a>'+
-      '<button class="btn btn-ghost" onclick="copyLink(\''+r.clientId+'\')">🔗 Copiar link</button>'+
-      '<button class="btn btn-red" onclick="event.stopPropagation();confirmDeleteRadar(\''+r.id+'\')">🗑 Excluir</button>'+
-    '</div>'+
-  '</div>';
+function radarRowHTML(r){
+  const cl=S.clientes.find(c=>c.id===r.clientId);
+  const st=radarStats(r);
+  return `<div class="radar-row">
+    <div class="radar-row-info">
+      <div class="radar-row-name">${cl?.name||r.clientId} — ${r.name||r.period}</div>
+      <div class="radar-row-sub">${r.period} · ${r.posts.length} postagens</div>
+      <div class="radar-chips">${chipsHTML(st)}</div>
+    </div>
+    <div class="radar-acts">
+      <button class="btn btn-primary" onclick="openDetail('${r.id}')">Ver respostas</button>
+      <a class="btn btn-blue" href="${CL_URL}/?preview=${r.clientId}" target="_blank">👁 Ver como cliente</a>
+      <button class="btn btn-ghost" onclick="copyLink('${r.clientId}')">🔗 Link</button>
+      <button class="btn btn-red" onclick="confirmDeleteRadar('${r.id}')">🗑</button>
+    </div>
+  </div>`;
 }
 
-function filterCliente(id) {
-  S.currentFilter = id;
-  const cl = S.clientes.find(c => c.id === id);
-  document.getElementById('radares-title').textContent = 'Radares — ' + (cl?.name || id);
-  document.getElementById('btn-filtro-clear').style.display = 'flex';
-  renderRadares();
-  goView('radares');
+function filterCliente(id){
+  S.filterClient=id;
+  const cl=S.clientes.find(c=>c.id===id);
+  document.getElementById('radares-title').textContent='Radares — '+(cl?.name||id);
+  document.getElementById('btn-clear-filter').style.display='flex';
+  renderRadares(); goView('radares');
 }
-
-function clearFilter() {
-  S.currentFilter = null;
-  document.getElementById('radares-title').textContent = 'Todos os radares';
-  document.getElementById('btn-filtro-clear').style.display = 'none';
+function clearFilter(){
+  S.filterClient=null;
+  document.getElementById('radares-title').textContent='Todos os radares';
+  document.getElementById('btn-clear-filter').style.display='none';
   renderRadares();
 }
 
-function copyLink(clientId) {
-  const link = CLIENT_URL + '/?preview=' + clientId;
-  navigator.clipboard.writeText(link).then(() => toast('Link copiado!')).catch(() => {
-    prompt('Copie o link:', link);
+/* ── TABS RADAR ── */
+function setRadarTab(tab){
+  document.querySelectorAll('.view-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+(tab==='lista'?'lista':'cal')).classList.add('active');
+  document.getElementById('radares-lista').style.display=tab==='lista'?'block':'none';
+  document.getElementById('radares-cal').style.display=tab==='lista'?'none':'block';
+  if(tab==='calendario')renderCalendario();
+}
+
+/* ── CALENDÁRIO ── */
+function calNav(dir){
+  if(dir===0){CAL.year=new Date().getFullYear();CAL.month=new Date().getMonth();}
+  else{CAL.month+=dir;if(CAL.month>11){CAL.month=0;CAL.year++;}if(CAL.month<0){CAL.month=11;CAL.year--;}}
+  renderCalendario();
+}
+
+function renderCalendario(){
+  const {year,month}=CAL;
+  const MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  document.getElementById('cal-title').textContent=MESES[month]+' '+year;
+
+  // Coletar posts de todos os radares filtrados
+  const radares=S.filterClient?S.radares.filter(r=>r.clientId===S.filterClient):S.radares;
+  const postsByDay={};
+  radares.forEach(r=>{
+    (r.posts||[]).forEach(p=>{
+      const date=p.dataISO||extractISO(p.data,year,month);
+      if(!date)return;
+      const d=new Date(date+'T12:00:00');
+      if(d.getFullYear()===year&&d.getMonth()===month){
+        const key=d.getDate();
+        if(!postsByDay[key])postsByDay[key]=[];
+        postsByDay[key].push({...p,radarId:r.id,clientName:r.clientName||r.clientId});
+      }
+    });
   });
+
+  const firstDay=new Date(year,month,1).getDay();
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  const daysInPrev=new Date(year,month,0).getDate();
+  const today=new Date();
+
+  let cells='';
+  // Dias do mês anterior
+  for(let i=firstDay-1;i>=0;i--){
+    cells+=`<div class="cal-cell other-month"><div class="cal-date">${daysInPrev-i}</div></div>`;
+  }
+  // Dias do mês atual
+  for(let d=1;d<=daysInMonth;d++){
+    const isToday=today.getFullYear()===year&&today.getMonth()===month&&today.getDate()===d;
+    const posts=postsByDay[d]||[];
+    const maxShow=3;
+    const postsHTML=posts.slice(0,maxShow).map(p=>
+      `<div class="cal-post ${tipoClass(p.tipo)}" title="${p.tema}" onclick="toast('${p.tipo} — ${p.tema}')">${p.tipo[0]} ${p.tema?.slice(0,18)||'—'}</div>`
+    ).join('');
+    const more=posts.length>maxShow?`<div class="cal-more">+${posts.length-maxShow} mais</div>`:'';
+    cells+=`<div class="cal-cell${isToday?' today':''}"><div class="cal-date">${d}</div>${postsHTML}${more}</div>`;
+  }
+  // Completar semana
+  const total=firstDay+daysInMonth;
+  const rem=total%7===0?0:7-(total%7);
+  for(let i=1;i<=rem;i++){
+    cells+=`<div class="cal-cell other-month"><div class="cal-date">${i}</div></div>`;
+  }
+  document.getElementById('cal-grid').innerHTML=cells;
+}
+
+function extractISO(dataFmt,year,month){
+  // Tenta extrair data de formato como "TER 12/05"
+  if(!dataFmt)return null;
+  const m=dataFmt.match(/(\d{2})\/(\d{2})/);
+  if(!m)return null;
+  return `${year}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;
 }
 
 /* ── DETALHE ── */
-async function openDetail(radarId) {
-  const r  = S.radares.find(x => x.id === radarId);
-  const cl = S.clientes.find(c => c.id === r.clientId);
-  if (!r) return;
-  document.getElementById('detail-hdr-title').textContent = (cl?.name||r.clientId) + ' — ' + (r.name||r.period);
+async function openDetail(radarId){
+  const r=S.radares.find(x=>x.id===radarId);
+  const cl=S.clientes.find(c=>c.id===r.clientId);
+  if(!r)return;
+  document.getElementById('detail-hdr-title').textContent=(cl?.name||r.clientId)+' — '+(r.name||r.period);
   goView('detail');
+  document.getElementById('detail-content').innerHTML='<div class="loading"><div class="spin"></div> Buscando respostas...</div>';
+  const issues=await ghIssues();
+  parseResp(issues);
+  const st=radarStats(r);
 
-  document.getElementById('detail-content').innerHTML = '<div class="loading"><div class="spin"></div> Buscando respostas...</div>';
-  const issues = await ghIssues();
-  parseRespostas(issues);
+  // Info cliente
+  const info=CLIENT_INFO[r.clientId];
+  const infoHTML=info?`
+  <div class="info-card" style="margin-bottom:1rem">
+    <div class="info-card-hdr"><h3>📋 Informações do cliente</h3></div>
+    <div class="info-card-body">
+      <div class="info-row"><span class="info-lbl">Slogan</span><span class="info-val">${info.slogan}</span></div>
+      <div class="info-row"><span class="info-lbl">Localização</span><span class="info-val">${info.localizacao}</span></div>
+      <div class="info-row"><span class="info-lbl">Segmento</span><span class="info-val">${info.segmento}</span></div>
+      <div class="info-row"><span class="info-lbl">Ticket médio</span><span class="info-val">${info.ticket}</span></div>
+      <div class="info-row"><span class="info-lbl">Tom de voz</span><span class="info-val">${info.tom}</span></div>
+      <div class="info-row"><span class="info-lbl">ICP</span><span class="info-val">${info.icp}</span></div>
+      <div class="info-section">
+        <h4>Paleta de cores</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          ${info.cores.map(c=>`<div style="display:flex;align-items:center;gap:6px;font-size:12px"><span class="color-swatch" style="background:${c.hex}"></span>${c.nome} <code style="color:var(--gray2);font-size:10px">${c.hex}</code></div>`).join('')}
+        </div>
+      </div>
+      <div class="info-section">
+        <h4>Links</h4>
+        <div class="info-row"><span class="info-lbl">Drive</span><a href="${info.drive}" target="_blank" style="color:var(--green);font-size:12px">Abrir pasta ↗</a></div>
+        <div class="info-row"><span class="info-lbl">Instagram</span><span class="info-val" style="font-size:12px">${info.instagram}</span></div>
+      </div>
+    </div>
+  </div>`:'' ;
 
-  const st = radarStats(r);
-  const hasComments = r.posts.some(p => getComment(r.id, p.idx !== undefined ? p.idx : 0));
-
-  const rows = r.posts.map((p, i) => {
-    const idx    = p.idx !== undefined ? p.idx : i;
-    const status = getStatus(r.id, idx);
-    const comment= getComment(r.id, idx);
-    const tipoClass = { Reels:'reels', Foto:'foto', Arte:'arte', Carrossel:'carrossel' }[p.tipo] || 'arte';
-    const sBadge = { aprovado:'s-ap ✓ Aprovado', reprovado:'s-re ✗ Reprovado', alteracao:'s-alt ✏ Alteração', aguardando:'s-wait ⏳ Aguardando' }[status] || 's-wait ⏳ Aguardando';
-    const [sc, sl] = sBadge.split(' ').reduce((a,v,i) => (i===0 ? [v,a[1]] : [a[0],a[1]+' '+v]), ['','']);
-    return '<tr>'+
-      '<td style="color:var(--gray2);white-space:nowrap">'+p.data+'</td>'+
-      '<td><span class="tipo-tag tipo-'+tipoClass+'">'+p.tipo+'</span></td>'+
-      '<td>'+p.tema+'</td>'+
-      '<td><span class="s-badge '+sc.trim()+'">'+sl.trim()+'</span></td>'+
-      '<td class="comment-cell">'+(comment ? '<div class="comment-text">💬 '+comment+'</div>' : '<span style="color:var(--gray2);font-size:12px">—</span>')+'</td>'+
-    '</tr>';
+  const rows=r.posts.map((p,i)=>{
+    const idx=p.idx!==undefined?p.idx:i;
+    const status=getStatus(r.id,idx);
+    const comment=getComment(r.id,idx);
+    const tc=tipoClass(p.tipo);
+    const sBadge={aprovado:'s-ap ✓ Aprovado',reprovado:'s-re ✗ Reprovado',alteracao:'s-alt ✏ Alteração',aguardando:'s-wait ⏳ Aguardando'}[status];
+    const [sc,...sl]=sBadge.split(' ');
+    return `<tr>
+      <td style="color:var(--gray2);white-space:nowrap">${p.data}</td>
+      <td><span class="tipo-tag tipo-${tc}">${p.tipo}</span></td>
+      <td>${p.tema||'—'}</td>
+      <td><span class="s-badge ${sc}">${sl.join(' ')}</span></td>
+      <td>${comment?`<div class="comment-text">💬 ${comment}</div>`:'<span style="color:var(--gray2);font-size:12px">—</span>'}</td>
+    </tr>`;
   }).join('');
 
-  document.getElementById('detail-content').innerHTML =
-    '<div class="detail-header">'+
-      '<div>'+
-        '<div class="detail-title">'+(cl?.name||r.clientId)+'</div>'+
-        '<div class="detail-sub">'+r.period+' &middot; '+r.posts.length+' postagens</div>'+
-        '<div class="detail-chips">'+chipsHTML(st)+'</div>'+
-      '</div>'+
-      '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
-        '<button class="btn btn-ghost" onclick="openDetail(\''+r.id+'\')">↻ Atualizar</button>'+
-        '<a class="btn btn-blue" href="'+CLIENT_URL+'/?preview='+r.clientId+'" target="_blank">👁 Ver como cliente</a>'+
-        '<button class="btn btn-ghost" onclick="copyLink(\''+r.clientId+'\')">🔗 Copiar link</button>'+
-      '</div>'+
-    '</div>'+
-    '<div class="table-wrap">'+
-      '<table>'+
-        '<thead><tr><th>Data</th><th>Tipo</th><th>Tema</th><th>Status</th><th>Comentário</th></tr></thead>'+
-        '<tbody>'+rows+'</tbody>'+
-      '</table>'+
-    '</div>'+
-    '<p style="font-size:11px;color:var(--gray2);margin-top:10px">Respostas recebidas via área do cliente. Atualize para ver as mais recentes.</p>';
-}
-
-/* ── DELETAR RADAR ── */
-async function confirmDeleteRadar(radarId) {
-  const r = S.radares.find(x => x.id === radarId);
-  if (!r) return;
-  if (!confirm('Excluir radar "' + (r.name||r.period) + '"?\nEssa ação não pode ser desfeita.')) return;
-  S.radares = S.radares.filter(x => x.id !== radarId);
-  try {
-    const { sha } = await ghGet('data/radares.json');
-    await ghPut('data/radares.json', S.radares, sha);
-    _DB_RADARES = S.radares;
-    toast('Radar excluído!');
-    renderDash(); renderRadares();
-  } catch(e) { toast('Erro ao excluir: ' + e.message); }
+  document.getElementById('detail-content').innerHTML=`
+    ${infoHTML}
+    <div class="detail-hdr">
+      <div>
+        <div class="detail-title">${cl?.name||r.clientId}</div>
+        <div class="detail-sub">${r.period} · ${r.posts.length} postagens</div>
+        <div class="detail-chips">${chipsHTML(st)}</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost" onclick="openDetail('${r.id}')">↻ Atualizar</button>
+        <a class="btn btn-blue" href="${CL_URL}/?preview=${r.clientId}" target="_blank">👁 Ver como cliente</a>
+        <button class="btn btn-ghost" onclick="copyLink('${r.clientId}')">🔗 Copiar link</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Data</th><th>Tipo</th><th>Tema</th><th>Status</th><th>Comentário</th></tr></thead>
+      <tbody>${rows}</tbody></table>
+    </div>
+    <p style="font-size:11px;color:var(--gray2);margin-top:8px">Respostas recebidas via área do cliente. Clique em Atualizar para ver as mais recentes.</p>`;
 }
 
 /* ── NOVO RADAR ── */
-function openNewRadar() {
-  document.getElementById('nr-cliente').innerHTML = S.clientes.map(c => '<option value="'+c.id+'">'+c.name+'</option>').join('');
-  document.getElementById('nr-nome').value = '';
-  document.getElementById('nr-start').value = '';
-  document.getElementById('nr-end').value = '';
-  openModal('ov-radar');
+function openNewRadar(){
+  document.getElementById('nr-cliente').innerHTML=S.clientes.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+  document.getElementById('nr-nome').value='';
+  document.getElementById('nr-start').value='';
+  document.getElementById('nr-end').value='';
+  NEW_POSTS=[];
+  renderPostsBuilder();
+  openOv('ov-radar');
 }
 
-async function saveNewRadar() {
-  const clientId = document.getElementById('nr-cliente').value;
-  const nome     = document.getElementById('nr-nome').value.trim();
-  const start    = document.getElementById('nr-start').value;
-  const end      = document.getElementById('nr-end').value;
-  if (!clientId || !nome || !start || !end) { toast('Preencha todos os campos'); return; }
-  const cl = S.clientes.find(c => c.id === clientId);
-  const fmt = d => { const [y,m,dd]=d.split('-'); return dd+'/'+m+'/'+y; };
-  const newR = { id: clientId+'-'+start+'_'+end, clientId, clientName: cl?.name||clientId, name: nome, period: fmt(start)+' – '+fmt(end), start, end, year: start.slice(0,4), posts: [] };
-  S.radares.push(newR);
-  try {
-    const { sha } = await ghGet('data/radares.json');
-    await ghPut('data/radares.json', S.radares, sha);
-    closeModal('ov-radar');
-    toast('Radar criado com sucesso!');
+function renderPostsBuilder(){
+  const el=document.getElementById('posts-list-builder');
+  if(!NEW_POSTS.length){
+    el.innerHTML='<div class="no-posts">Nenhuma postagem adicionada ainda.<br>Clique em "+ Adicionar post" para começar.</div>';
+    return;
+  }
+  el.innerHTML=NEW_POSTS.map((p,i)=>`
+    <div class="post-item">
+      <div class="post-item-num">${i+1}</div>
+      <div class="post-item-info">
+        <div class="pi-top">
+          <span class="tipo-tag tipo-${tipoClass(p.tipo)}">${p.tipo}</span>
+          <span class="pi-tema">${p.tema||'(sem tema)'}</span>
+        </div>
+        <div class="pi-meta">${p.data||'—'} · ${p.obj||'—'}${p.criativo?` · <a href="${p.criativo}" target="_blank" style="color:var(--green);font-size:11px">Ver criativo ↗</a>`:''}</div>
+      </div>
+      <div class="post-item-acts">
+        <button class="icon-btn" onclick="editPost(${i})" title="Editar">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 1 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button>
+        <button class="icon-btn del" onclick="removePost(${i})" title="Remover">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+        </button>
+      </div>
+    </div>`).join('');
+}
+
+function openNewPost(){
+  document.getElementById('post-edit-idx').value='-1';
+  document.getElementById('post-modal-title').textContent='📝 Nova postagem';
+  document.getElementById('post-tipo').value='Reels';
+  document.getElementById('post-obj').value='Hero';
+  document.getElementById('post-data').value='';
+  document.getElementById('post-hora').value='12:00';
+  document.getElementById('post-tema').value='';
+  document.getElementById('post-criativo').value='';
+  document.getElementById('post-legenda').value='';
+  openOv('ov-post');
+}
+
+function editPost(i){
+  const p=NEW_POSTS[i];
+  document.getElementById('post-edit-idx').value=String(i);
+  document.getElementById('post-modal-title').textContent='✏️ Editar postagem';
+  document.getElementById('post-tipo').value=p.tipo||'Reels';
+  document.getElementById('post-obj').value=p.obj||'Hero';
+  // Extrair data ISO do formato "TER 12/05"
+  const m=p.data?.match(/(\d{2})\/(\d{2})/);
+  if(m){ const y=new Date().getFullYear(); document.getElementById('post-data').value=`${y}-${m[2]}-${m[1]}`; }
+  document.getElementById('post-hora').value=p.hora||'12:00';
+  document.getElementById('post-tema').value=p.tema||'';
+  document.getElementById('post-criativo').value=p.criativo||'';
+  // Converter <br> de volta para newlines no textarea
+  document.getElementById('post-legenda').value=(p.legenda||'').replace(/<br>/gi,'\n');
+  openOv('ov-post');
+}
+
+function removePost(i){ NEW_POSTS.splice(i,1); renderPostsBuilder(); }
+
+function savePost(){
+  const idx=parseInt(document.getElementById('post-edit-idx').value);
+  const tipo=document.getElementById('post-tipo').value;
+  const obj=document.getElementById('post-obj').value;
+  const dataISO=document.getElementById('post-data').value;
+  const hora=document.getElementById('post-hora').value;
+  const tema=document.getElementById('post-tema').value.trim();
+  const criativo=document.getElementById('post-criativo').value.trim();
+  const legendaRaw=document.getElementById('post-legenda').value.trim();
+
+  if(!tema){ toast('Preencha o tema do post'); return; }
+
+  // Formatar data para exibição
+  const DIAS=['DOM','SEG','TER','QUA','QUI','SEX','SÁB'];
+  let dataFmt='';
+  if(dataISO){
+    const d=new Date(dataISO+'T12:00:00');
+    dataFmt=DIAS[d.getDay()]+' '+String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0');
+  }
+
+  // Detectar driveId e isVideo
+  const driveMatch=criativo.match(/\/d\/([^/\?]+)/);
+  const driveId=driveMatch?driveMatch[1]:null;
+  const isVideo=!!driveId&&tipo==='Reels';
+  const isCanva=criativo.includes('canva');
+
+  // Converter newlines em <br> na legenda
+  const legenda=legendaRaw.replace(/\n/g,'<br>');
+
+  const post={
+    idx: idx>=0 ? NEW_POSTS[idx].idx : NEW_POSTS.length,
+    data: dataFmt,
+    dataISO,
+    hora,
+    tipo, obj, tema, criativo, driveId, isVideo, isCanva, legenda
+  };
+
+  if(idx>=0){ NEW_POSTS[idx]=post; }
+  else { NEW_POSTS.push(post); }
+
+  renderPostsBuilder();
+  closeOv('ov-post');
+  toast(idx>=0?'Post atualizado!':'Post adicionado!');
+}
+
+async function saveNewRadar(){
+  const clientId=document.getElementById('nr-cliente').value;
+  const nome=document.getElementById('nr-nome').value.trim();
+  const start=document.getElementById('nr-start').value;
+  const end=document.getElementById('nr-end').value;
+  if(!clientId||!nome||!start||!end){ toast('Preencha cliente, nome e período'); return; }
+  const cl=S.clientes.find(c=>c.id===clientId);
+  const fmt=d=>{ const[y,m,dd]=d.split('-'); return `${dd}/${m}/${y}`; };
+  const newR={
+    id:`${clientId}-${start}_${end}`,
+    clientId, clientName:cl?.name||clientId,
+    name:nome, period:`${fmt(start)} – ${fmt(end)}`,
+    start, end, year:start.slice(0,4),
+    posts:NEW_POSTS.map((p,i)=>({...p,idx:i}))
+  };
+  S.radares.unshift(newR);
+  try{
+    const sha=await ghGetSha('data/radares.json');
+    await ghPut('data/radares.json',S.radares,sha);
+    closeOv('ov-radar');
+    toast(`Radar criado com ${NEW_POSTS.length} postagens!`);
     renderDash(); renderRadares();
-  } catch(e) { toast('Erro ao salvar: ' + e.message); S.radares.pop(); }
+  }catch(e){ toast('Erro ao salvar: '+e.message); S.radares.shift(); }
+}
+
+/* ── DELETAR RADAR ── */
+async function confirmDeleteRadar(id){
+  const r=S.radares.find(x=>x.id===id);
+  if(!r||!confirm(`Excluir radar "${r.name||r.period}"?\nEssa ação não pode ser desfeita.`))return;
+  S.radares=S.radares.filter(x=>x.id!==id);
+  try{
+    const sha=await ghGetSha('data/radares.json');
+    await ghPut('data/radares.json',S.radares,sha);
+    toast('Radar excluído!');
+    renderDash(); renderRadares();
+  }catch(e){ toast('Erro: '+e.message); }
+}
+
+/* ── LINK ── */
+function copyLink(clientId){
+  const link=CL_URL+'/?preview='+clientId;
+  navigator.clipboard.writeText(link).then(()=>toast('Link copiado!')).catch(()=>prompt('Copie o link:',link));
 }
 
 /* ── CLIENTES ── */
-function renderClientes() {
-  document.getElementById('clientes-list').innerHTML = S.clientes.map(cl => {
-    const rads = S.radares.filter(r => r.clientId === cl.id).length;
-    return '<div class="client-row">'+
-      '<div class="client-info">'+
-        '<div class="client-name">'+cl.name+'</div>'+
-        '<div class="client-email">'+cl.email+' &middot; '+rads+' radar'+(rads!==1?'es':'')+'</div>'+
-      '</div>'+
-      '<div style="display:flex;gap:8px">'+
-        '<button class="btn btn-ghost" onclick="copyLink(\''+cl.id+'\')">🔗 Link</button>'+
-        '<button class="btn btn-blue" onclick="editCliente(\''+cl.id+'\')">Editar</button>'+
-      '</div>'+
-    '</div>';
-  }).join('') || '<div class="loading" style="padding:2rem">Nenhum cliente cadastrado.</div>';
+function renderClientes(){
+  document.getElementById('clientes-content').innerHTML=S.clientes.map(cl=>{
+    const info=CLIENT_INFO[cl.id];
+    return `<div class="client-row">
+      <div class="client-info">
+        <div class="client-name">${cl.name}</div>
+        <div class="client-email">${cl.email}${info?` · ${info.localizacao}`:''}</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        ${info?`<a class="btn btn-ghost" href="${info.drive}" target="_blank" style="font-size:11px">Drive ↗</a>`:''}
+        <button class="btn btn-ghost" onclick="copyLink('${cl.id}')">🔗 Link</button>
+        <button class="btn btn-blue" onclick="editCliente('${cl.id}')">Editar</button>
+      </div>
+    </div>
+    ${info?`<div class="info-card" style="margin-bottom:1rem">
+      <div class="info-card-hdr"><h3>📋 ${cl.name} — Informações</h3></div>
+      <div class="info-card-body">
+        <div class="info-row"><span class="info-lbl">Slogan</span><span class="info-val">${info.slogan}</span></div>
+        <div class="info-row"><span class="info-lbl">Segmento</span><span class="info-val">${info.segmento}</span></div>
+        <div class="info-row"><span class="info-lbl">Ticket médio</span><span class="info-val">${info.ticket}</span></div>
+        <div class="info-row"><span class="info-lbl">Tom de voz</span><span class="info-val">${info.tom}</span></div>
+        <div class="info-row"><span class="info-lbl">ICP</span><span class="info-val">${info.icp}</span></div>
+        <div class="info-row"><span class="info-lbl">Tipografia</span><span class="info-val">${info.tipografia}</span></div>
+        <div class="info-section"><h4>Paleta de cores</h4>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            ${info.cores.map(c=>`<div style="display:flex;align-items:center;gap:6px;font-size:12px"><span class="color-swatch" style="background:${c.hex}"></span>${c.nome}<code style="color:var(--gray2);font-size:10px">${c.hex}</code></div>`).join('')}
+          </div>
+        </div>
+        <div class="info-section"><h4>Diferenciais</h4><p style="font-size:12px;color:var(--gray);line-height:1.6">${info.diferenciais}</p></div>
+      </div>
+    </div>`:''}`;
+  }).join('')||'<div class="loading">Nenhum cliente.</div>';
 }
 
-function openNewCliente() {
-  document.getElementById('nc-nome').value = '';
-  document.getElementById('nc-email').value = '';
-  document.getElementById('nc-senha').value = '';
-  openModal('ov-cliente');
+function openNewCliente(){
+  ['nc-nome','nc-email','nc-senha'].forEach(id=>document.getElementById(id).value='');
+  openOv('ov-cliente');
 }
-
-async function saveNewCliente() {
-  const nome  = document.getElementById('nc-nome').value.trim();
-  const email = document.getElementById('nc-email').value.trim();
-  const senha = document.getElementById('nc-senha').value.trim();
-  if (!nome || !email || !senha) { toast('Preencha todos os campos'); return; }
-  const id = nome.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
-  if (S.clientes.find(c => c.email.toLowerCase() === email.toLowerCase())) { toast('Email já cadastrado'); return; }
-  const novo = { id, name: nome, email, senha };
-  S.clientes.push(novo);
-  try {
-    const { sha } = await ghGet('data/clientes.json');
-    await ghPut('data/clientes.json', S.clientes, sha);
-    _DB_CLIENTES = S.clientes;
-    closeModal('ov-cliente');
-    toast('Cliente criado! Login: ' + email + ' / ' + senha);
+async function saveNewCliente(){
+  const nome=document.getElementById('nc-nome').value.trim();
+  const email=document.getElementById('nc-email').value.trim();
+  const senha=document.getElementById('nc-senha').value.trim();
+  if(!nome||!email||!senha){ toast('Preencha todos os campos'); return; }
+  const id=nome.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  if(S.clientes.find(c=>c.email.toLowerCase()===email.toLowerCase())){ toast('Email já cadastrado'); return; }
+  S.clientes.push({id,name:nome,email,senha});
+  try{
+    const sha=await ghGetSha('data/clientes.json');
+    await ghPut('data/clientes.json',S.clientes,sha);
+    closeOv('ov-cliente');
+    toast(`Cliente criado! Login: ${email} / ${senha}`);
     renderClientes(); renderDash();
-  } catch(e) { toast('Erro: ' + e.message); S.clientes.pop(); }
+  }catch(e){ toast('Erro: '+e.message); S.clientes.pop(); }
 }
-
-function editCliente(id) {
-  const cl = S.clientes.find(c => c.id === id);
-  if (!cl) return;
-  document.getElementById('ec-id').value    = cl.id;
-  document.getElementById('ec-nome').value  = cl.name;
-  document.getElementById('ec-email').value = cl.email;
-  document.getElementById('ec-senha').value = '';
-  openModal('ov-edit-cliente');
+function editCliente(id){
+  const cl=S.clientes.find(c=>c.id===id);
+  if(!cl)return;
+  document.getElementById('ec-id').value=cl.id;
+  document.getElementById('ec-nome').value=cl.name;
+  document.getElementById('ec-email').value=cl.email;
+  document.getElementById('ec-senha').value='';
+  openOv('ov-edit-cliente');
 }
-
-async function saveEditCliente() {
-  const id    = document.getElementById('ec-id').value;
-  const nome  = document.getElementById('ec-nome').value.trim();
-  const email = document.getElementById('ec-email').value.trim();
-  const senha = document.getElementById('ec-senha').value.trim();
-  if (!nome || !email) { toast('Preencha nome e email'); return; }
-  const idx = S.clientes.findIndex(c => c.id === id);
-  if (idx === -1) return;
-  S.clientes[idx].name  = nome;
-  S.clientes[idx].email = email;
-  if (senha) S.clientes[idx].senha = senha;
-  try {
-    const { sha } = await ghGet('data/clientes.json');
-    await ghPut('data/clientes.json', S.clientes, sha);
-    closeModal('ov-edit-cliente');
+async function saveEditCliente(){
+  const id=document.getElementById('ec-id').value;
+  const nome=document.getElementById('ec-nome').value.trim();
+  const email=document.getElementById('ec-email').value.trim();
+  const senha=document.getElementById('ec-senha').value.trim();
+  if(!nome||!email){ toast('Preencha nome e email'); return; }
+  const idx=S.clientes.findIndex(c=>c.id===id);
+  if(idx===-1)return;
+  S.clientes[idx].name=nome; S.clientes[idx].email=email;
+  if(senha)S.clientes[idx].senha=senha;
+  try{
+    const sha=await ghGetSha('data/clientes.json');
+    await ghPut('data/clientes.json',S.clientes,sha);
+    closeOv('ov-edit-cliente');
     toast('Cliente atualizado!');
     renderClientes(); renderDash();
-  } catch(e) { toast('Erro: ' + e.message); }
+  }catch(e){ toast('Erro: '+e.message); }
 }
+
+// Dados embutidos — atualizados a cada deploy
+const _DB_RADARES = [{"id":"oceano-2026-05-12_2026-06-02","clientId":"oceano","clientName":"Oceano Perfumes","name":"Radar Maio — Junho 2026","period":"12/05 – 02/06/2026","start":"2026-05-12","end":"2026-06-02","year":"2026","posts":[{"idx":0,"data":"TER 12/05","tipo":"Reels","obj":"Help","tema":"Onde aplicar perfume para durar mais","legenda":"Seu perfume não fixa como deveria?<br>Talvez o problema não seja o perfume.<br><br>A forma como você aplica faz toda a diferença na duração e projeção da fragrância.<br><br>✔️ Prefira áreas quentes<br>✔️ Aplique na pele<br>✔️ Evite esfregar após borrifar<br><br>Pequenos detalhes mudam completamente a experiência.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1kHe9zl6xRDSrKA45w6ofhPzIsHRXmfyS/view","driveId":"1kHe9zl6xRDSrKA45w6ofhPzIsHRXmfyS","isVideo":true,"isCanva":false},{"idx":1,"data":"QUA 13/05","tipo":"Reels","obj":"Hero","tema":"Decants Oceano","legenda":"Quer conhecer perfumes incríveis… sem precisar investir no frasco inteiro? ✨<br><br>Os decants são a forma perfeita de:<br><br>✔️ testar antes de comprar<br>✔️ conhecer novas fragrâncias<br>✔️ ter mais opções no dia a dia<br>✔️ levar seu perfume favorito para qualquer lugar<br><br>Mais praticidade.<br>Mais possibilidades.<br>Menos arrependimento.<br><br>🌊 Decants disponíveis na Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1aotQdm7Gk9PPvluxNEBUhIyFv4iGzzTD/view","driveId":"1aotQdm7Gk9PPvluxNEBUhIyFv4iGzzTD","isVideo":true,"isCanva":false},{"idx":2,"data":"QUI 14/05","tipo":"Foto","obj":"Hero","tema":"Salvo Intense","legenda":"Intenso desde a primeira borrifada. 🔥<br>O Salvo Intense é para quem gosta de fragrâncias marcantes, sofisticadas e com presença forte.<br>Um perfume masculino que transmite confiança, elegância e personalidade sem esforço.<br>Perfeito para quem quer ser notado… e lembrado.<br>🌊 Oceano Perfumes<br><br>Escolha como você quer ser lembrado.<br>💬 Chame no WhatsApp para conhecer essa fragrância<br><br>📍 Disponível na loja","criativo":"https://drive.google.com/file/d/1MCzHPoVn8kNpXzs36afnoC9fJbZHpwPh/view","driveId":"1MCzHPoVn8kNpXzs36afnoC9fJbZHpwPh","isVideo":false,"isCanva":false},{"idx":3,"data":"SEX 15/05","tipo":"Foto","obj":"Hero","tema":"Dalal Lattafa","legenda":"Delicado na primeira impressão.<br><br>Marcante na memória. ✨<br>O Dalal Lattafa mistura doçura, sofisticação e presença em uma fragrância envolvente e elegante.<br>Perfeito para quem gosta de perfumes femininos que chamam atenção sem exagerar.<br>🌊 Oceano Perfumes<br><br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1Wg-_aon3S-FoYz0sPo2IiXKRXMyaRQhl/view","driveId":"1Wg-_aon3S-FoYz0sPo2IiXKRXMyaRQhl","isVideo":false,"isCanva":false},{"idx":4,"data":"SÁB 16/05","tipo":"Arte","obj":"Hub","tema":"Avaliação","legenda":"Cada experiência importa. 🌊<br>Na Oceano, acreditamos que escolher um perfume vai muito além da compra.<br>É sobre atendimento, cuidado e encontrar a fragrância certa para cada momento.<br>Feedbacks como esse mostram que estamos no caminho certo — e nos motivam a entregar uma experiência ainda melhor todos os dias.<br>✨ Obrigado pela confiança.<br>💬 Já viveu a experiência Oceano?<br><br>Sua avaliação faz toda a diferença pra gente.","criativo":"https://canva.link/3g774rufnr7rxab","driveId":null,"isVideo":false,"isCanva":true},{"idx":5,"data":"TER 19/05","tipo":"Reels","obj":"Hero","tema":"Entregamos em Guarulhos e Região","legenda":"Seu perfume favorito, sem precisar sair de casa. 🌊<br><br>Na Oceano Perfumes, você escolhe sua fragrância ideal e a gente entrega até você.<br><br>✨ Perfumes importados<br>✨ Kits especiais<br>✨ Fragrâncias femininas e masculinas<br>✨ Entrega em Guarulhos e região<br><br>Mais praticidade para encontrar o perfume que combina com você.<br><br>💬 Chame no WhatsApp e faça seu pedido<br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1rThZC-dtM6wMl2DI98iVclSMURLKijcr/view","driveId":"1rThZC-dtM6wMl2DI98iVclSMURLKijcr","isVideo":true,"isCanva":false},{"idx":6,"data":"QUA 20/05","tipo":"Foto","obj":"Hero","tema":"Ayka Rahyaan","legenda":"Delicado, feminino e cheio de personalidade ✨<br><br>O Ayka Rayhaan é aquele perfume que combina suavidade com presença na medida certa.<br><br>Uma fragrância elegante, envolvente e perfeita para quem gosta de deixar uma impressão leve… mas inesquecível.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>💬 Chame no WhatsApp para conhecer essa fragrância<br>📍 Disponível na loja","criativo":"https://drive.google.com/file/d/1ien2rXCI8I7Pm-KkYE-eXJ11XNKJfcDn/view","driveId":"1ien2rXCI8I7Pm-KkYE-eXJ11XNKJfcDn","isVideo":false,"isCanva":false},{"idx":7,"data":"QUI 21/05","tipo":"Reels","obj":"Hero","tema":"Club de Nuit Intense Man","legenda":"Não é o tipo de perfume que passa despercebido. 🔥<br><br>O Club de Nuit Intense Man foi feito para homens que gostam de presença, sofisticação e impacto.<br><br>Uma fragrância intensa, marcante e elegante na medida certa.<br><br>Perfume para quem entra… e naturalmente chama atenção.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>💬 Chame no WhatsApp para conhecer essa fragrância<br>📍 Disponível na loja","criativo":"https://drive.google.com/file/d/16xPiIAk9t6vtVskLW14ZNLRF5g2hg2fV/view","driveId":"16xPiIAk9t6vtVskLW14ZNLRF5g2hg2fV","isVideo":true,"isCanva":false},{"idx":8,"data":"SÁB 23/05","tipo":"Foto","obj":"Hero","tema":"Decante","legenda":"Mais fragrâncias.<br>Mais possibilidades. ✨<br><br>Os decants são perfeitos para quem quer conhecer novos perfumes, testar antes de investir ou ter sua fragrância favorita sempre por perto.<br><br>Pequenos no tamanho.<br>Gigantes na experiência.<br><br>🌊 Decants disponíveis na Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>💬 Chame no WhatsApp para consultar as fragrâncias disponíveis","criativo":"https://drive.google.com/file/d/11EL3pLaT3aOZfjwfbi5_sTPPWJ7CwGcY/view","driveId":"11EL3pLaT3aOZfjwfbi5_sTPPWJ7CwGcY","isVideo":false,"isCanva":false},{"idx":9,"data":"TER 26/05","tipo":"Foto","obj":"Hero","tema":"Spectre Ghost","legenda":"Intenso, sofisticado e impossível de ignorar. 🖤<br><br>O Spectre Ghost é para quem gosta de presença forte, elegância marcante e fragrâncias que deixam impressão por onde passam.<br><br>Um perfume que não pede atenção.<br>Ele naturalmente recebe.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>📦 Enviamos para todo o Brasil","criativo":"https://drive.google.com/file/d/1Y2Rsrfw1qw5m4jzZzf_dNpJ8MOGao5ra/view","driveId":"1Y2Rsrfw1qw5m4jzZzf_dNpJ8MOGao5ra","isVideo":false,"isCanva":false},{"idx":10,"data":"QUA 27/05","tipo":"Reels","obj":"Hub","tema":"Muito além de uma perfumaria","legenda":"A Oceano nasceu para ser mais do que uma perfumaria. 🌊<br><br>Aqui, cada fragrância carrega presença, personalidade e memória.<br><br>Mais do que escolher um perfume, queremos que você viva uma experiência, da descoberta da fragrância até a forma como ela faz você se sentir.","criativo":"https://drive.google.com/file/d/1aWa9n1qW2Av35vC5GMH5Y1mULLvOkTs9/view","driveId":"1aWa9n1qW2Av35vC5GMH5Y1mULLvOkTs9","isVideo":true,"isCanva":false},{"idx":11,"data":"SÁB 30/05","tipo":"Foto","obj":"Hub","tema":"Em breve novidades","legenda":"O que estamos construindo vai muito além de perfumes. ✨<br><br>A Oceano está crescendo, evoluindo e preparando novidades especiais para tornar sua experiência ainda mais única.<br><br>Em breve, uma nova fase começa por aqui. 🌊<br><br>Fiquem ligados.<br>O melhor ainda está por vir.<br><br>💙 Oceano Perfumes","criativo":"https://drive.google.com/file/d/1BKceHuhNOTLWiQFOWIH8n6rTIWsK0rHL/view","driveId":"1BKceHuhNOTLWiQFOWIH8n6rTIWsK0rHL","isVideo":false,"isCanva":false},{"idx":12,"data":"SEG 01/06","tipo":"Carrossel","obj":"Help","tema":"Perfume caro não significa perfume melhor","legenda":"Perfume não é competição de preço.<br>É conexão. ✨<br><br>O perfume certo não é o mais caro da prateleira.<br>É aquele que combina com sua presença, sua personalidade e a forma como você quer ser lembrado.<br><br>Na Oceano, acreditamos que fragrância boa é a que faz sentido pra você — não pro status.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://canva.link/17n5bi1nkrotckx","driveId":null,"isVideo":false,"isCanva":true},{"idx":13,"data":"TER 02/06","tipo":"Foto","obj":"Hero","tema":"9am Dive","legenda":"Fresco, elegante e cheio de personalidade. 💙<br><br>O 9am Dive é aquele perfume que transmite leveza sem perder presença.<br><br>Uma fragrância versátil, moderna e perfeita para quem gosta de se destacar de forma natural.<br><br>Ideal para o dia a dia, mas marcante o suficiente para ser lembrado.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>📦 Enviamos para todo o Brasil","criativo":"https://drive.google.com/file/d/1d3CsGoNiHVnoR0BxkFs1wm5Y6dxlhuct/view","driveId":"1d3CsGoNiHVnoR0BxkFs1wm5Y6dxlhuct","isVideo":false,"isCanva":false}]}];
+const _DB_CLIENTES = [{"id":"oceano","name":"Oceano Perfumes","email":"oceano@email.com","senha":"oceano2026"},{"id":"veza","name":"Veza Burger","email":"veza@email.com","senha":"veza2026"}];
 </script>
 </body>
 </html>
