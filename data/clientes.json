@@ -1,0 +1,14 @@
+[
+  {
+    "id": "oceano",
+    "name": "Oceano Perfumes",
+    "email": "oceano@email.com",
+    "senha": "oceano2026"
+  },
+  {
+    "id": "veza",
+    "name": "Veza Burger",
+    "email": "veza@email.com",
+    "senha": "veza2026"
+  }
+]
