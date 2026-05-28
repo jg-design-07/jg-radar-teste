@@ -649,7 +649,7 @@ async function renderRelatorios(){
         html+='</div>';
         html+='<div class="radar-acts">';
         html+='<a class="btn btn-primary" href="'+rep.url+'" target="_blank">&#11015; Baixar PDF</a>';
-        html+='<button class="btn btn-red" onclick="deleteRelatorio(''+rep.id+'')">&#128465;</button>';
+        html+='<button class="btn btn-red" onclick="deleteRelatorio(&quot;'+rep.id+'&quot;)">&#128465;</button>';
         html+='</div>';
         html+='</div>';
       });
