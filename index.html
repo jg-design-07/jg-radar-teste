@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JG Design — Área do Cliente</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#2ECC71;--gbg:rgba(30,74,46,0.45);--gborder:rgba(46,204,113,0.3);
+  --bg:#121212;--bg2:#1a1a1a;--bg3:#222;--bg4:#2a2a2a;
+  --white:#fff;--gray:#ccc;--gray2:#888;--red:#e74c3c;--amber:#f0a500;--r:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;min-height:100vh;}
+.screen{display:none;} .screen.on{display:block;}
+
+/* LOGIN */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 15% 15%,#0d3320,transparent 50%),var(--bg);}
+.login-card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:2.5rem;width:100%;max-width:400px;}
+.login-brand{font-size:11px;font-weight:600;letter-spacing:4px;color:var(--gray2);text-transform:uppercase;margin-bottom:6px;text-align:center;}
+.login-sep{width:50px;height:2px;background:var(--green);margin:10px auto 24px;}
+.login-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;text-align:center;margin-bottom:6px;}
+.login-sub{font-size:13px;color:var(--gray2);text-align:center;margin-bottom:28px;line-height:1.6;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--gray2);text-transform:uppercase;margin-bottom:6px;}
+.field input{width:100%;background:var(--bg3);border:1px solid var(--bg4);border-radius:10px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s;}
+.field input:focus{border-color:var(--green);}
+.login-btn{width:100%;padding:12px;background:var(--green);color:#000;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:4px;transition:opacity .15s;}
+.login-btn:hover{opacity:.85;}
+.login-err{font-size:12px;color:var(--red);text-align:center;margin-top:10px;display:none;}
+
+/* HEADER */
+.header{background:var(--bg2);border-bottom:1px solid #222;height:54px;display:flex;align-items:center;padding:0 1.5rem;gap:12px;position:sticky;top:0;z-index:100;}
+.header-logo{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;flex:1;}
+.header-logo span{color:var(--gray2);font-size:13px;font-weight:400;}
+.header-chip{font-size:12px;font-weight:600;padding:5px 14px;border-radius:99px;background:var(--gbg);color:var(--green);border:1px solid var(--gborder);}
+.header-btn{font-size:12px;color:var(--gray2);background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:8px;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;}
+.header-btn:hover{background:var(--bg3);color:var(--white);}
+.header-btn.danger:hover{color:var(--red);}
+
+/* LISTA DE RADARES */
+.list-page{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem;}
+.page-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:4px;}
+.page-sub{font-size:13px;color:var(--gray2);margin-bottom:2rem;}
+.sec-label{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--green);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(46,204,113,.15);}
+.year-group{margin-bottom:2rem;}
+.radar-card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:10px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:border-color .15s,background .15s;}
+.radar-card:hover{border-color:var(--gborder);background:rgba(46,204,113,.03);}
+.radar-icon{width:48px;height:48px;border-radius:10px;background:var(--gbg);border:1px solid var(--gborder);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;line-height:1.3;}
+.radar-info{flex:1;}
+.radar-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:3px;}
+.radar-meta{font-size:12px;color:var(--gray2);margin-bottom:8px;}
+.chips{display:flex;gap:6px;flex-wrap:wrap;}
+.chip{font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;}
+.chip-ok  {background:rgba(46,204,113,.12);color:var(--green);border:1px solid rgba(46,204,113,.3);}
+.chip-no  {background:rgba(231,76,60,.12); color:var(--red);  border:1px solid rgba(231,76,60,.3);}
+.chip-alt {background:rgba(240,165,0,.12); color:var(--amber);border:1px solid rgba(240,165,0,.3);}
+.chip-wait{background:rgba(255,255,255,.05);color:var(--gray2);border:1px solid rgba(255,255,255,.1);}
+.radar-arrow{color:var(--gray2);font-size:22px;flex-shrink:0;}
+.empty{text-align:center;padding:4rem 1rem;color:var(--gray2);font-size:14px;line-height:1.8;}
+
+/* RADAR INDIVIDUAL */
+.radar-page{max-width:1100px;margin:0 auto;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--gray2);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;padding:1.25rem 1.5rem 0;transition:color .15s;}
+.back-btn:hover{color:var(--white);}
+
+/* COVER */
+.cover{min-height:80vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 10% 10%,#0d3320,transparent 55%),var(--bg);}
+.cover::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(46,204,113,.03) 40px,rgba(46,204,113,.03) 41px);}
+.blob{position:absolute;border-radius:50%;opacity:.15;}
+.blob.a{width:300px;height:300px;background:var(--green);top:-80px;left:-80px;}
+.blob.b{width:180px;height:180px;background:#333;bottom:-50px;right:-50px;}
+.cover-inner{position:relative;z-index:1;text-align:center;padding:3rem 1.5rem;}
+.c-brand{font-size:10px;font-weight:600;letter-spacing:4px;color:var(--gray2);text-transform:uppercase;margin-bottom:6px;}
+.c-sep{width:70px;height:1.5px;background:var(--green);margin:10px auto 24px;}
+.c-client{font-family:'Syne',sans-serif;font-size:clamp(16px,3vw,22px);font-weight:700;color:var(--gray);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;}
+.c-title{font-family:'Syne',sans-serif;font-size:clamp(70px,14vw,130px);font-weight:800;color:var(--green);line-height:.9;letter-spacing:-3px;margin-bottom:14px;}
+.c-period{font-family:'Syne',sans-serif;font-size:clamp(16px,3vw,24px);font-weight:700;}
+.c-badges{margin-top:18px;display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.c-badge{background:var(--bg3);border:1px solid #333;border-radius:99px;padding:5px 14px;font-size:12px;color:var(--gray);}
+.c-badge b{color:var(--green);}
+.c-scroll{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--gray2);font-size:10px;letter-spacing:2px;animation:bounce 2s infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* POSTS */
+.posts-wrap{max-width:1100px;margin:0 auto;padding:3rem 1.5rem 2rem;}
+.posts-lbl{font-size:10px;font-weight:700;letter-spacing:4px;color:var(--green);text-transform:uppercase;margin-bottom:2rem;display:flex;align-items:center;gap:10px;}
+.posts-lbl::after{content:'';flex:1;height:1px;background:rgba(46,204,113,.2);}
+.post-card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);margin-bottom:20px;overflow:hidden;transition:border-color .2s;}
+.post-card:hover{border-color:var(--gborder);}
+.post-hdr{background:#111;padding:13px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #222;flex-wrap:wrap;}
+.tipo{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 11px;border-radius:99px;text-transform:uppercase;}
+.tipo-reels    {background:#e74c3c22;color:#e74c3c;border:1px solid #e74c3c44;}
+.tipo-foto     {background:#f39c1222;color:#f39c12;border:1px solid #f39c1244;}
+.tipo-arte     {background:#3498db22;color:#3498db;border:1px solid #3498db44;}
+.tipo-carrossel{background:#9b59b622;color:#9b59b6;border:1px solid #9b59b644;}
+.post-date{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;}
+.post-obj{font-size:11px;color:var(--gray2);}
+.post-btns{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap;}
+.abtn{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:7px 14px;border-radius:8px;border:2px solid transparent;cursor:pointer;transition:all .15s;}
+.abtn:hover{opacity:.85;transform:scale(1.03);}
+.abtn.ok {background:#2ECC71;color:#000;} .abtn.ok.sel {outline:3px solid #fff;outline-offset:2px;}
+.abtn.no {background:#e74c3c;color:#fff;} .abtn.no.sel {outline:3px solid #fff;outline-offset:2px;}
+.abtn.alt{background:#f0a500;color:#000;} .abtn.alt.sel{outline:3px solid #fff;outline-offset:2px;}
+.post-body{display:grid;grid-template-columns:300px 1fr;min-height:260px;}
+@media(max-width:680px){.post-body{grid-template-columns:1fr;}}
+.crit-area{background:#1a1a1a;border-right:1px solid #252525;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;gap:8px;position:relative;}
+.crit-lbl{position:absolute;top:9px;left:11px;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--green);text-transform:uppercase;}
+.crit-area img{width:100%;max-height:320px;object-fit:cover;border-radius:8px;}
+.video-wrap{width:100%;aspect-ratio:9/16;max-height:320px;border-radius:8px;overflow:hidden;background:#000;}
+.video-wrap iframe{width:100%;height:100%;border:none;}
+.crit-ph{width:100%;background:#1e1e1e;border-radius:8px;border:1px dashed #333;padding:24px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.crit-ph p{font-size:11px;color:var(--gray2);}
+.crit-link{display:inline-flex;align-items:center;gap:5px;background:rgba(46,204,113,.1);border:1px solid var(--gborder);color:var(--green);font-size:11px;font-weight:600;padding:6px 13px;border-radius:8px;text-decoration:none;}
+.leg-area{padding:18px 22px;display:flex;flex-direction:column;gap:12px;}
+.lbl-sm{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--green);text-transform:uppercase;}
+.tema-ttl{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;line-height:1.2;margin-top:-2px;}
+.status-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.s-chip{font-size:10px;font-weight:600;letter-spacing:1px;padding:3px 10px;border-radius:99px;text-transform:uppercase;background:rgba(240,165,0,.15);color:var(--amber);border:1px solid rgba(240,165,0,.3);}
+.s-chip.ap{background:rgba(46,204,113,.15);color:var(--green);border-color:var(--gborder);}
+.s-chip.re{background:rgba(231,76,60,.15);color:var(--red);border-color:rgba(231,76,60,.3);}
+/* COMENTÁRIO */
+.com-wrap{margin-top:8px;}
+.com-toggle{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray2);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;padding:0;transition:color .15s;}
+.com-toggle:hover{color:var(--white);} .com-toggle.tem{color:var(--amber);}
+.com-box{margin-top:8px;display:none;background:var(--bg3);border:1px solid var(--bg4);border-radius:10px;overflow:hidden;}
+.com-box.open{display:block;}
+.com-ta{width:100%;background:transparent;border:none;color:var(--white);font-size:13px;font-family:'Inter',sans-serif;line-height:1.6;padding:12px 14px;resize:none;outline:none;min-height:80px;}
+.com-ta::placeholder{color:var(--gray2);}
+.com-foot{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-top:1px solid var(--bg4);}
+.com-chars{font-size:11px;color:var(--gray2);}
+.com-save{font-size:11px;font-weight:600;padding:5px 12px;border-radius:7px;background:var(--gbg);color:var(--green);border:1px solid var(--gborder);cursor:pointer;font-family:'Inter',sans-serif;}
+/* LEGENDA BOX */
+.leg-box{background:var(--gbg);border:1px solid rgba(26,122,67,.6);border-radius:10px;padding:14px;flex:1;}
+.leg-txt{font-size:13px;line-height:1.7;color:var(--gray);}
+/* BARRA ENVIAR */
+.sub-bar{position:sticky;bottom:0;z-index:50;background:rgba(18,18,18,.96);backdrop-filter:blur(12px);border-top:1px solid var(--bg4);padding:14px 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sub-prog{flex:1;min-width:180px;}
+.sub-lbl{font-size:11px;color:var(--gray2);margin-bottom:6px;}
+.prog-bg{background:var(--bg3);border-radius:99px;height:5px;overflow:hidden;}
+.prog-fill{background:var(--green);height:100%;border-radius:99px;transition:width .3s;width:0%;}
+.sub-btn{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:11px 28px;background:var(--green);color:#000;border:none;border-radius:10px;cursor:pointer;white-space:nowrap;transition:opacity .15s;}
+.sub-btn:hover{opacity:.85;} .sub-btn:disabled{opacity:.35;cursor:not-allowed;}
+.sub-btn.sent{background:var(--bg3);color:var(--green);border:1px solid var(--gborder);}
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem;}
+.overlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid #333;border-radius:var(--r);padding:2rem;max-width:420px;width:100%;text-align:center;}
+.modal-ico{font-size:36px;margin-bottom:12px;}
+.modal-ttl{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px;}
+.modal-sub{font-size:13px;color:var(--gray2);line-height:1.6;margin-bottom:1.5rem;}
+.modal-grid{background:var(--bg3);border-radius:10px;padding:14px;margin-bottom:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left;}
+.m-stat{font-size:13px;} .m-ok{color:var(--green);font-weight:600;} .m-no{color:var(--red);font-weight:600;} .m-alt{color:var(--amber);font-weight:600;} .m-wait{color:var(--gray2);font-weight:600;}
+.modal-acts{display:flex;gap:10px;justify-content:center;}
+.m-confirm{padding:10px 24px;background:var(--green);color:#000;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;}
+.m-cancel{padding:10px 20px;background:none;border:1px solid #333;border-radius:9px;font-size:13px;color:var(--gray2);cursor:pointer;font-family:'Inter',sans-serif;}
+/* FOOTER */
+.footer{background:#111;border-top:1px solid #222;padding:18px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.footer p{font-size:11px;color:var(--gray2);} .footer strong{color:var(--green);}
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--bg3);border:1px solid #333;padding:11px 22px;border-radius:99px;font-size:13px;color:var(--white);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:999;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+/* LOADING */
+.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:4rem;color:var(--gray2);font-size:13px;}
+.spin{width:16px;height:16px;border:2px solid #333;border-top-color:var(--green);border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="screen on" id="s-login">
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-brand">JG Design</div>
+      <div class="login-sep"></div>
+      <div class="login-title">Área do Cliente</div>
+      <div class="login-sub">Acesse para visualizar e aprovar suas postagens.</div>
+      <div class="field"><label>Email</label><input type="email" id="l-email" placeholder="seu@email.com"></div>
+      <div class="field"><label>Senha</label><input type="password" id="l-senha" placeholder="••••••••"></div>
+      <button class="login-btn" onclick="doLogin()">Entrar</button>
+      <p class="login-err" id="l-err">Email ou senha incorretos.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LISTA DE RADARES -->
+<div class="screen" id="s-list">
+  <div class="header">
+    <div class="header-logo">JG Design <span>/ Área do Cliente</span></div>
+    <div class="header-chip" id="h-client-name"></div>
+    <button class="header-btn danger" onclick="doLogout()">&#8594; Sair</button>
+  </div>
+  <div class="list-page">
+    <div class="page-title">Seus Radares</div>
+    <div class="page-sub" id="list-sub">Carregando...</div>
+    <div id="list-content"><div class="loading"><div class="spin"></div> Carregando radares...</div></div>
+  </div>
+</div>
+
+<!-- RADAR INDIVIDUAL -->
+<div class="screen" id="s-radar">
+  <div class="header">
+    <div class="header-logo">JG Design <span>/ Radar</span></div>
+    <div class="header-chip" id="h-client-name2"></div>
+    <button class="header-btn danger" onclick="doLogout()">&#8594; Sair</button>
+  </div>
+  <div class="radar-page">
+    <button class="back-btn" onclick="goList()">&#8592; Voltar aos radares</button>
+    <div id="radar-content"></div>
+  </div>
+  <div class="sub-bar">
+    <div class="sub-prog">
+      <div class="sub-lbl" id="prog-lbl">Selecione o status de cada post para enviar</div>
+      <div class="prog-bg"><div class="prog-fill" id="prog-fill"></div></div>
+    </div>
+    <button class="sub-btn" id="sub-btn" onclick="openModal()" disabled>Enviar respostas &#8594;</button>
+  </div>
+  <div class="footer">
+    <p>&copy; 2026 <strong>JG Design</strong> &mdash; Material Confidencial</p>
+    <p id="footer-txt"></p>
+  </div>
+</div>
+
+<!-- MODAL CONFIRMAÇÃO -->
+<div class="overlay" id="modal-ov" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-ico">&#128203;</div>
+    <div class="modal-ttl">Confirmar envio</div>
+    <div class="modal-sub">Revise o resumo antes de enviar para a JG Design.</div>
+    <div class="modal-grid" id="modal-grid"></div>
+    <div class="modal-acts">
+      <button class="m-cancel" onclick="closeModal()">Revisar mais</button>
+      <button class="m-confirm" onclick="confirmSend()">Confirmar e enviar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO = 'jg-design-07/jg-radar-teste';
+const API  = 'https://api.github.com';
+const T    = 'ghp_kqvPFAM7yA' + 'kKD9nJWJB0dG8AymOvWq2m2pcf';
+
+let STATE = { cliente: null, radares: [], radar: null, resp: {}, preview: false };
+
+/* ── UTILS ── */
+function show(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('on')); document.getElementById(id).classList.add('on'); }
+function toast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 3000); }
+function tipoClass(t) { return { Reels:'reels', Foto:'foto', Arte:'arte', Carrossel:'carrossel' }[t] || 'arte'; }
+
+/* ── GITHUB ── */
+// Dados embutidos diretamente (sem fetch, sem encoding issues)
+const _RADARES = [{"id":"oceano-2026-05-12_2026-06-02","clientId":"oceano","clientName":"Oceano Perfumes","name":"Radar Maio — Junho 2026","period":"12/05 – 02/06/2026","start":"2026-05-12","end":"2026-06-02","year":"2026","posts":[{"idx":0,"data":"TER 12/05","tipo":"Reels","obj":"Help","tema":"Onde aplicar perfume para durar mais","legenda":"Seu perfume não fixa como deveria?<br>Talvez o problema não seja o perfume.<br><br>A forma como você aplica faz toda a diferença na duração e projeção da fragrância.<br><br>✔️ Prefira áreas quentes<br>✔️ Aplique na pele<br>✔️ Evite esfregar após borrifar<br><br>Pequenos detalhes mudam completamente a experiência.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1kHe9zl6xRDSrKA45w6ofhPzIsHRXmfyS/view","driveId":"1kHe9zl6xRDSrKA45w6ofhPzIsHRXmfyS","isVideo":true,"isCanva":false},{"idx":1,"data":"QUA 13/05","tipo":"Reels","obj":"Hero","tema":"Decants Oceano","legenda":"Quer conhecer perfumes incríveis… sem precisar investir no frasco inteiro? ✨<br><br>Os decants são a forma perfeita de:<br><br>✔️ testar antes de comprar<br>✔️ conhecer novas fragrâncias<br>✔️ ter mais opções no dia a dia<br>✔️ levar seu perfume favorito para qualquer lugar<br><br>Mais praticidade.<br>Mais possibilidades.<br>Menos arrependimento.<br><br>🌊 Decants disponíveis na Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1aotQdm7Gk9PPvluxNEBUhIyFv4iGzzTD/view","driveId":"1aotQdm7Gk9PPvluxNEBUhIyFv4iGzzTD","isVideo":true,"isCanva":false},{"idx":2,"data":"QUI 14/05","tipo":"Foto","obj":"Hero","tema":"Salvo Intense","legenda":"Intenso desde a primeira borrifada. 🔥<br>O Salvo Intense é para quem gosta de fragrâncias marcantes, sofisticadas e com presença forte.<br>Um perfume masculino que transmite confiança, elegância e personalidade sem esforço.<br>Perfeito para quem quer ser notado… e lembrado.<br>🌊 Oceano Perfumes<br><br>Escolha como você quer ser lembrado.<br>💬 Chame no WhatsApp para conhecer essa fragrância<br><br>📍 Disponível na loja","criativo":"https://drive.google.com/file/d/1MCzHPoVn8kNpXzs36afnoC9fJbZHpwPh/view","driveId":"1MCzHPoVn8kNpXzs36afnoC9fJbZHpwPh","isVideo":false,"isCanva":false},{"idx":3,"data":"SEX 15/05","tipo":"Foto","obj":"Hero","tema":"Dalal Lattafa","legenda":"Delicado na primeira impressão.<br><br>Marcante na memória. ✨<br>O Dalal Lattafa mistura doçura, sofisticação e presença em uma fragrância envolvente e elegante.<br>Perfeito para quem gosta de perfumes femininos que chamam atenção sem exagerar.<br>🌊 Oceano Perfumes<br><br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1Wg-_aon3S-FoYz0sPo2IiXKRXMyaRQhl/view","driveId":"1Wg-_aon3S-FoYz0sPo2IiXKRXMyaRQhl","isVideo":false,"isCanva":false},{"idx":4,"data":"SÁB 16/05","tipo":"Arte","obj":"Hub","tema":"Avaliação","legenda":"Cada experiência importa. 🌊<br>Na Oceano, acreditamos que escolher um perfume vai muito além da compra.<br>É sobre atendimento, cuidado e encontrar a fragrância certa para cada momento.<br>Feedbacks como esse mostram que estamos no caminho certo — e nos motivam a entregar uma experiência ainda melhor todos os dias.<br>✨ Obrigado pela confiança.<br>💬 Já viveu a experiência Oceano?<br><br>Sua avaliação faz toda a diferença pra gente.","criativo":"https://canva.link/3g774rufnr7rxab","driveId":null,"isVideo":false,"isCanva":true},{"idx":5,"data":"TER 19/05","tipo":"Reels","obj":"Hero","tema":"Entregamos em Guarulhos e Região","legenda":"Seu perfume favorito, sem precisar sair de casa. 🌊<br><br>Na Oceano Perfumes, você escolhe sua fragrância ideal e a gente entrega até você.<br><br>✨ Perfumes importados<br>✨ Kits especiais<br>✨ Fragrâncias femininas e masculinas<br>✨ Entrega em Guarulhos e região<br><br>Mais praticidade para encontrar o perfume que combina com você.<br><br>💬 Chame no WhatsApp e faça seu pedido<br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://drive.google.com/file/d/1rThZC-dtM6wMl2DI98iVclSMURLKijcr/view","driveId":"1rThZC-dtM6wMl2DI98iVclSMURLKijcr","isVideo":true,"isCanva":false},{"idx":6,"data":"QUA 20/05","tipo":"Foto","obj":"Hero","tema":"Ayka Rahyaan","legenda":"Delicado, feminino e cheio de personalidade ✨<br><br>O Ayka Rayhaan é aquele perfume que combina suavidade com presença na medida certa.<br><br>Uma fragrância elegante, envolvente e perfeita para quem gosta de deixar uma impressão leve… mas inesquecível.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>💬 Chame no WhatsApp para conhecer essa fragrância<br>📍 Disponível na loja","criativo":"https://drive.google.com/file/d/1ien2rXCI8I7Pm-KkYE-eXJ11XNKJfcDn/view","driveId":"1ien2rXCI8I7Pm-KkYE-eXJ11XNKJfcDn","isVideo":false,"isCanva":false},{"idx":7,"data":"QUI 21/05","tipo":"Reels","obj":"Hero","tema":"Club de Nuit Intense Man","legenda":"Não é o tipo de perfume que passa despercebido. 🔥<br><br>O Club de Nuit Intense Man foi feito para homens que gostam de presença, sofisticação e impacto.<br><br>Uma fragrância intensa, marcante e elegante na medida certa.<br><br>Perfume para quem entra… e naturalmente chama atenção.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>💬 Chame no WhatsApp para conhecer essa fragrância<br>📍 Disponível na loja","criativo":"https://drive.google.com/file/d/16xPiIAk9t6vtVskLW14ZNLRF5g2hg2fV/view","driveId":"16xPiIAk9t6vtVskLW14ZNLRF5g2hg2fV","isVideo":true,"isCanva":false},{"idx":8,"data":"SÁB 23/05","tipo":"Foto","obj":"Hero","tema":"Decante","legenda":"Mais fragrâncias.<br>Mais possibilidades. ✨<br><br>Os decants são perfeitos para quem quer conhecer novos perfumes, testar antes de investir ou ter sua fragrância favorita sempre por perto.<br><br>Pequenos no tamanho.<br>Gigantes na experiência.<br><br>🌊 Decants disponíveis na Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>💬 Chame no WhatsApp para consultar as fragrâncias disponíveis","criativo":"https://drive.google.com/file/d/11EL3pLaT3aOZfjwfbi5_sTPPWJ7CwGcY/view","driveId":"11EL3pLaT3aOZfjwfbi5_sTPPWJ7CwGcY","isVideo":false,"isCanva":false},{"idx":9,"data":"TER 26/05","tipo":"Foto","obj":"Hero","tema":"Spectre Ghost","legenda":"Intenso, sofisticado e impossível de ignorar. 🖤<br><br>O Spectre Ghost é para quem gosta de presença forte, elegância marcante e fragrâncias que deixam impressão por onde passam.<br><br>Um perfume que não pede atenção.<br>Ele naturalmente recebe.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>📦 Enviamos para todo o Brasil","criativo":"https://drive.google.com/file/d/1Y2Rsrfw1qw5m4jzZzf_dNpJ8MOGao5ra/view","driveId":"1Y2Rsrfw1qw5m4jzZzf_dNpJ8MOGao5ra","isVideo":false,"isCanva":false},{"idx":10,"data":"QUA 27/05","tipo":"Reels","obj":"Hub","tema":"Muito além de uma perfumaria","legenda":"A Oceano nasceu para ser mais do que uma perfumaria. 🌊<br><br>Aqui, cada fragrância carrega presença, personalidade e memória.<br><br>Mais do que escolher um perfume, queremos que você viva uma experiência, da descoberta da fragrância até a forma como ela faz você se sentir.","criativo":"https://drive.google.com/file/d/1aWa9n1qW2Av35vC5GMH5Y1mULLvOkTs9/view","driveId":"1aWa9n1qW2Av35vC5GMH5Y1mULLvOkTs9","isVideo":true,"isCanva":false},{"idx":11,"data":"SÁB 30/05","tipo":"Foto","obj":"Hub","tema":"Em breve novidades","legenda":"O que estamos construindo vai muito além de perfumes. ✨<br><br>A Oceano está crescendo, evoluindo e preparando novidades especiais para tornar sua experiência ainda mais única.<br><br>Em breve, uma nova fase começa por aqui. 🌊<br><br>Fiquem ligados.<br>O melhor ainda está por vir.<br><br>💙 Oceano Perfumes","criativo":"https://drive.google.com/file/d/1BKceHuhNOTLWiQFOWIH8n6rTIWsK0rHL/view","driveId":"1BKceHuhNOTLWiQFOWIH8n6rTIWsK0rHL","isVideo":false,"isCanva":false},{"idx":12,"data":"SEG 01/06","tipo":"Carrossel","obj":"Help","tema":"Perfume caro não significa perfume melhor","legenda":"Perfume não é competição de preço.<br>É conexão. ✨<br><br>O perfume certo não é o mais caro da prateleira.<br>É aquele que combina com sua presença, sua personalidade e a forma como você quer ser lembrado.<br><br>Na Oceano, acreditamos que fragrância boa é a que faz sentido pra você — não pro status.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.","criativo":"https://canva.link/17n5bi1nkrotckx","driveId":null,"isVideo":false,"isCanva":true},{"idx":13,"data":"TER 02/06","tipo":"Foto","obj":"Hero","tema":"9am Dive","legenda":"Fresco, elegante e cheio de personalidade. 💙<br><br>O 9am Dive é aquele perfume que transmite leveza sem perder presença.<br><br>Uma fragrância versátil, moderna e perfeita para quem gosta de se destacar de forma natural.<br><br>Ideal para o dia a dia, mas marcante o suficiente para ser lembrado.<br><br>🌊 Oceano Perfumes<br>Escolha como você quer ser lembrado.<br><br>📦 Enviamos para todo o Brasil","criativo":"https://drive.google.com/file/d/1d3CsGoNiHVnoR0BxkFs1wm5Y6dxlhuct/view","driveId":"1d3CsGoNiHVnoR0BxkFs1wm5Y6dxlhuct","isVideo":false,"isCanva":false}]}];
+const _CLIENTES = [{"id":"oceano","name":"Oceano Perfumes","email":"oceano@email.com","senha":"oceano2026"},{"id":"veza","name":"Veza Burger","email":"veza@email.com","senha":"veza2026"}];
+async function ghGet(path) {
+  if (path === 'data/radares.json') return _RADARES;
+  if (path === 'data/clientes.json') return _CLIENTES;
+  throw new Error('path desconhecido: ' + path);
+}
+async function ghPost(body) {
+  await fetch(API + '/repos/' + REPO + '/issues', { method: 'POST', headers: { Authorization: 'token ' + T, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json' }, body: JSON.stringify(body) });
+}
+
+/* ── AUTH ── */
+async function doLogin() {
+  const email = document.getElementById('l-email').value.trim().toLowerCase();
+  const senha = document.getElementById('l-senha').value;
+  const err   = document.getElementById('l-err');
+  err.style.display = 'none';
+  try {
+    const clientes = await ghGet('data/clientes.json');
+    const c = clientes.find(x => x.email.toLowerCase() === email && x.senha === senha);
+    if (!c) { err.style.display = 'block'; return; }
+    STATE.cliente = c;
+    sessionStorage.setItem('jg_sess', JSON.stringify(c));
+    await enterApp();
+  } catch(e) { err.textContent = 'Erro de conexão. Tente novamente.'; err.style.display = 'block'; }
+}
+
+function doLogout() {
+  sessionStorage.removeItem('jg_sess');
+  STATE = { cliente: null, radares: [], radar: null, resp: {}, preview: false };
+  show('s-login');
+}
+
+document.getElementById('l-senha').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+/* ── APP ── */
+async function enterApp(preview) {
+  STATE.preview = !!preview;
+  const n = STATE.cliente.name;
+  document.getElementById('h-client-name').textContent  = n;
+  document.getElementById('h-client-name2').textContent = n;
+  show('s-list');
+  await loadList();
+}
+
+async function loadList() {
+  document.getElementById('list-content').innerHTML = '<div class="loading"><div class="spin"></div> Carregando radares...</div>';
+  try {
+    const all = await ghGet('data/radares.json');
+    STATE.radares = all.filter(r => r.clientId === STATE.cliente.id);
+  } catch(e) { STATE.radares = []; }
+  renderList();
+}
+
+function renderList() {
+  const radares = STATE.radares;
+  document.getElementById('list-sub').textContent = radares.length + ' radar' + (radares.length !== 1 ? 'es' : '') + ' disponíveis.';
+  if (!radares.length) {
+    document.getElementById('list-content').innerHTML = '<div class="empty">Nenhum radar disponível ainda.<br>Em breve seu material de aprovação estará aqui.</div>';
+    return;
+  }
+  const byYear = {};
+  radares.forEach(r => { const y = r.year || r.start.slice(0,4); if (!byYear[y]) byYear[y] = []; byYear[y].push(r); });
+  const years = Object.keys(byYear).sort((a,b) => b-a);
+  document.getElementById('list-content').innerHTML = years.map(y => {
+    const rads = byYear[y].sort((a,b) => b.start.localeCompare(a.start));
+    return '<div class="year-group"><div class="sec-label">' + y + '</div>' +
+      rads.map(r => {
+        const mon = parseInt(r.start.slice(5,7));
+        const MESES = ['','JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+        return '<div class="radar-card" onclick="openRadar(\'' + r.id + '\')">' +
+          '<div class="radar-icon">' + MESES[mon] + '<br>' + y.slice(2) + '</div>' +
+          '<div class="radar-info">' +
+            '<div class="radar-name">' + (r.name || r.period) + '</div>' +
+            '<div class="radar-meta">' + r.period + ' &middot; ' + r.posts.length + ' postagens</div>' +
+            '<div class="chips">' +
+              (r.posts.length ? '<span class="chip chip-wait">&#9203; ' + r.posts.length + ' aguardando revisão</span>' : '') +
+            '</div>' +
+          '</div>' +
+          '<div class="radar-arrow">&rsaquo;</div>' +
+        '</div>';
+      }).join('') + '</div>';
+  }).join('');
+}
+
+/* ── RADAR ── */
+async function openRadar(id) {
+  STATE.radar = STATE.radares.find(r => r.id === id);
+  STATE.resp  = {};
+  if (!STATE.radar) return;
+  document.getElementById('footer-txt').textContent = 'Radar de Aprovação | ' + STATE.cliente.name + ' | ' + STATE.radar.period;
+  show('s-radar');
+  document.getElementById('radar-content').innerHTML = '<div class="loading"><div class="spin"></div> Carregando...</div>';
+  document.getElementById('sub-btn').disabled = true;
+  document.getElementById('sub-btn').className = 'sub-btn';
+  document.getElementById('sub-btn').textContent = 'Enviar respostas →';
+  updateProg();
+  renderRadar();
+}
+
+function goList() { show('s-list'); }
+
+function renderRadar() {
+  const r = STATE.radar;
+  const crit = p => {
+    if (p.isVideo && p.driveId) return '<div class="video-wrap"><iframe src="https://drive.google.com/file/d/' + p.driveId + '/preview" allow="autoplay" allowfullscreen></iframe></div>';
+    if (!p.isVideo && p.driveId) return '<img src="https://drive.google.com/thumbnail?id=' + p.driveId + '&sz=w600" alt="' + p.tema + '" loading="lazy">';
+    return '<div class="crit-ph"><p>' + p.tipo + ' — clique para visualizar</p><a href="' + (p.criativo||'#') + '" target="_blank" class="crit-link">Ver criativo &#8599;</a></div>';
+  };
+
+  const posts = r.posts.map((p, i) => {
+    const leg = p.legenda || '';
+    return '<div class="post-card" id="pc-' + i + '">' +
+      '<div class="post-hdr">' +
+        '<span class="tipo tipo-' + tipoClass(p.tipo) + '">' + p.tipo + '</span>' +
+        '<div><div class="post-date">' + p.data + '</div><div class="post-obj">' + (p.obj||'') + '</div></div>' +
+        '<div class="post-btns">' +
+          '<button class="abtn alt" id="ba-' + i + '" onclick="setS(' + i + ',\'alteracao\')">&#9999; ALTERAÇÃO</button>' +
+          '<button class="abtn no"  id="bn-' + i + '" onclick="setS(' + i + ',\'reprovado\')">&#10007; REPROVADO</button>' +
+          '<button class="abtn ok"  id="bo-' + i + '" onclick="setS(' + i + ',\'aprovado\')">&#10003; APROVADO</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="post-body">' +
+        '<div class="crit-area"><span class="crit-lbl">Criativo</span>' + crit(p) + '</div>' +
+        '<div class="leg-area">' +
+          '<div><div class="lbl-sm">Tema</div><div class="tema-ttl">' + p.tema + '</div></div>' +
+          '<div class="status-row"><span class="s-chip" id="sc-' + i + '">Aguardando aprovação</span></div>' +
+          '<div class="com-wrap">' +
+            '<button class="com-toggle" id="ct-' + i + '" onclick="togCom(' + i + ')">&#128172; Adicionar comentário</button>' +
+            '<div class="com-box" id="cb-' + i + '">' +
+              '<textarea class="com-ta" id="cta-' + i + '" placeholder="Comentário ou pedido de alteração para este post..." oninput="cCount(' + i + ')"></textarea>' +
+              '<div class="com-foot"><span class="com-chars" id="ccc-' + i + '">0 caracteres</span><button class="com-save" onclick="saveCom(' + i + ')">Salvar</button></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="leg-box"><div class="lbl-sm">Legenda</div><div class="leg-txt">' + leg + '</div></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  document.getElementById('radar-content').innerHTML =
+    '<div class="cover"><div class="blob a"></div><div class="blob b"></div>' +
+    '<div class="cover-inner">' +
+      '<div class="c-brand">JG Design — Agência de Marketing Digital</div><div class="c-sep"></div>' +
+      '<div class="c-client">' + (r.clientName||r.clientId) + '</div>' +
+      '<div class="c-title">Radar</div>' +
+      '<div class="c-period">' + r.period + '</div>' +
+      '<div class="c-badges">' +
+        '<div class="c-badge"><b>' + r.posts.length + '</b> postagens</div>' +
+        '<div class="c-badge"><b>' + r.posts.filter(p=>p.tipo==='Reels').length + '</b> Reels</div>' +
+        '<div class="c-badge"><b>' + r.posts.filter(p=>p.tipo==='Foto').length + '</b> Fotos</div>' +
+      '</div>' +
+      '<div class="c-scroll"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>ROLAR PARA REVISAR</div>' +
+    '</div></div>' +
+    '<div class="posts-wrap"><div class="posts-lbl">Postagens para aprovação</div>' + posts + '</div>';
+}
+
+/* ── STATUS ── */
+function setS(i, s) {
+  STATE.resp[i] = STATE.resp[i] || {};
+  STATE.resp[i].status = s;
+  STATE.resp[i].idx = STATE.radar.posts[i].idx !== undefined ? STATE.radar.posts[i].idx : i;
+  ['ba-','bn-','bo-'].forEach(p => document.getElementById(p+i)?.classList.remove('sel'));
+  const map = { aprovado:'bo-', reprovado:'bn-', alteracao:'ba-' };
+  document.getElementById(map[s]+i)?.classList.add('sel');
+  const sc = document.getElementById('sc-'+i);
+  sc.innerHTML = { aprovado:'&#10003; Aprovado', reprovado:'&#10007; Reprovado', alteracao:'&#9999; Alteração' }[s];
+  sc.className = 's-chip' + (s==='aprovado'?' ap':s==='reprovado'?' re':'');
+  updateProg();
+}
+
+/* ── COMENTÁRIO ── */
+function togCom(i) { document.getElementById('cb-'+i)?.classList.toggle('open'); }
+function cCount(i) { const ta=document.getElementById('cta-'+i),cc=document.getElementById('ccc-'+i); if(ta&&cc)cc.textContent=ta.value.length+' caracteres'; }
+function saveCom(i) {
+  const ta = document.getElementById('cta-'+i);
+  const c  = ta ? ta.value.trim() : '';
+  STATE.resp[i] = STATE.resp[i] || {};
+  STATE.resp[i].comment = c;
+  STATE.resp[i].idx = STATE.radar.posts[i].idx !== undefined ? STATE.radar.posts[i].idx : i;
+  const ct = document.getElementById('ct-'+i);
+  ct.className = 'com-toggle' + (c?' tem':'');
+  ct.innerHTML = (c ? '&#128172; Comentário salvo' : '&#128172; Adicionar comentário');
+  toast(c ? 'Comentário salvo!' : 'Comentário removido');
+  updateProg();
+}
+
+/* ── PROGRESSO ── */
+function updateProg() {
+  if (!STATE.radar) return;
+  const total = STATE.radar.posts.length;
+  const done  = Object.values(STATE.resp).filter(r => r.status).length;
+  const pct   = total > 0 ? Math.round((done/total)*100) : 0;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-lbl').textContent  = done + ' de ' + total + ' posts revisados';
+  document.getElementById('sub-btn').disabled = done === 0;
+}
+
+/* ── MODAL ── */
+function openModal() {
+  if (!STATE.radar) return;
+  const stats = { aprovado:0, reprovado:0, alteracao:0, aguardando:0 };
+  STATE.radar.posts.forEach((p,i) => { const s = STATE.resp[i]?.status||'aguardando'; stats[s]++; });
+  const coms = Object.values(STATE.resp).filter(r=>r.comment).length;
+  document.getElementById('modal-grid').innerHTML =
+    '<div class="m-stat"><span class="m-ok">&#10003; '+stats.aprovado+'</span> aprovado'+(stats.aprovado!==1?'s':'')+'</div>'+
+    '<div class="m-stat"><span class="m-no">&#10007; '+stats.reprovado+'</span> reprovado'+(stats.reprovado!==1?'s':'')+'</div>'+
+    '<div class="m-stat"><span class="m-alt">&#9999; '+stats.alteracao+'</span> altera'+(stats.alteracao!==1?'ções':'ção')+'</div>'+
+    '<div class="m-stat"><span class="m-wait">&#9203; '+stats.aguardando+'</span> aguardando</div>'+
+    (coms?'<div class="m-stat" style="grid-column:1/-1;color:var(--amber)">&#128172; '+coms+' comentário'+(coms!==1?'s':'')+'</div>':'');
+  document.getElementById('modal-ov').classList.add('open');
+}
+function closeModal() { document.getElementById('modal-ov').classList.remove('open'); }
+
+async function confirmSend() {
+  const btn = document.getElementById('sub-btn');
+  closeModal(); btn.disabled = true; btn.textContent = 'Enviando...';
+  let ok = 0;
+  for (const [i, r] of Object.entries(STATE.resp)) {
+    if (!r.status) continue;
+    try {
+      await ghPost({
+        title: '[RESPOSTA] ' + STATE.radar.id + ' | post-' + r.idx + ' | ' + r.status,
+        body: JSON.stringify({ radarId: STATE.radar.id, postIndex: r.idx, tema: STATE.radar.posts[i]?.tema||'', status: r.status, comment: r.comment||'', ts: new Date().toISOString(), clientId: STATE.cliente.id, clientName: STATE.cliente.name }),
+        labels: ['radar-resposta', r.status]
+      });
+      ok++;
+    } catch(e) {}
+  }
+  btn.classList.add('sent'); btn.textContent = '✓ Respostas enviadas!';
+  toast(ok + ' resposta' + (ok!==1?'s':'') + ' enviada' + (ok!==1?'s':'') + ' com sucesso!');
+}
+
+/* ── INIT ── */
+// Verificar se é preview do painel (?preview=TOKEN)
+const urlP = new URLSearchParams(location.search);
+const prevToken = urlP.get('preview');
+if (prevToken) {
+  // Painel está abrindo em modo preview — carregar cliente pelo token
+  (async () => {
+    try {
+      const clientes = await ghGet('data/clientes.json');
+      const c = clientes.find(x => x.id === prevToken);
+      if (c) { STATE.cliente = c; await enterApp(true); }
+    } catch(e) {}
+  })();
+} else {
+  // Verificar sessão salva
+  const sess = sessionStorage.getItem('jg_sess');
+  if (sess) {
+    try { STATE.cliente = JSON.parse(sess); enterApp(); } catch(e) {}
+  }
+}
+</script>
+</body>
+</html>
