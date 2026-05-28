@@ -261,6 +261,9 @@ tr:hover td{background:rgba(255,255,255,.02);}
         <button class="nav-item" id="nav-clientes" onclick="goView('clientes')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clientes
         </button>
+        <button class="nav-item" id="nav-relatorios" onclick="goView('relatorios')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Relatórios
+        </button>
       </nav>
       <div class="sidebar-foot">
         <button class="logout-btn" onclick="doLogout()">
@@ -336,6 +339,20 @@ tr:hover td{background:rgba(255,255,255,.02);}
       <div id="view-clientes" style="display:none">
         <div class="main-hdr"><h2>Clientes</h2><button class="btn btn-primary" onclick="openNewCliente()">+ Novo cliente</button></div>
         <div class="content" id="clientes-content"></div>
+      </div>
+
+      <!-- RELATÓRIOS -->
+      <div id="view-relatorios" style="display:none">
+        <div class="main-hdr">
+          <h2>Relatórios Mensais</h2>
+          <button class="btn btn-primary" onclick="openUploadRelatorio()">+ Enviar relatório</button>
+        </div>
+        <div class="content">
+          <div class="sec-lbl">Relatórios enviados</div>
+          <div id="relatorios-admin-list">
+            <div class="loading"><div class="spin"></div> Carregando...</div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -431,6 +448,37 @@ tr:hover td{background:rgba(255,255,255,.02);}
 </div>
 </div>
 
+<!-- MODAL: UPLOAD RELATÓRIO -->
+<div class="overlay" id="ov-relatorio" onclick="if(event.target===this)closeOv('ov-relatorio')">
+<div class="modal" style="max-width:480px">
+  <h3>📄 Enviar relatório</h3>
+  <div class="form-grid" style="margin-bottom:12px">
+    <div class="form-field"><label>Cliente</label><select id="rel-cliente"></select></div>
+    <div class="form-field"><label>Período (ex: Maio 2026)</label><input type="text" id="rel-periodo" placeholder="Maio 2026"></div>
+  </div>
+  <div class="form-grid full" style="margin-bottom:12px">
+    <div class="form-field"><label>Nome do relatório</label><input type="text" id="rel-nome" placeholder="Relatório Mensal Maio 2026"></div>
+  </div>
+  <div class="form-grid full" style="margin-bottom:4px">
+    <div class="form-field">
+      <label>Arquivo PDF</label>
+      <input type="file" id="rel-arquivo" accept=".pdf" style="background:var(--bg3);border:1px solid var(--bg4);border-radius:8px;padding:9px 12px;color:var(--gray);font-size:13px;cursor:pointer">
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--gray2);margin-bottom:1rem">O PDF será armazenado no GitHub e o link ficará disponível para o cliente.</p>
+  <div id="rel-progress" style="display:none;margin-bottom:1rem">
+    <div style="background:var(--bg3);border-radius:99px;height:6px;overflow:hidden">
+      <div id="rel-bar" style="background:var(--green);height:100%;width:0%;transition:width .3s;border-radius:99px"></div>
+    </div>
+    <p id="rel-status" style="font-size:12px;color:var(--gray2);margin-top:6px;text-align:center">Enviando...</p>
+  </div>
+  <div class="modal-acts">
+    <button class="btn btn-ghost" onclick="closeOv('ov-relatorio')">Cancelar</button>
+    <button class="btn btn-primary" id="rel-btn-enviar" onclick="uploadRelatorio()">Enviar PDF</button>
+  </div>
+</div>
+</div>
+
 <!-- MODAL: EDITAR CLIENTE -->
 <div class="overlay" id="ov-edit-cliente" onclick="if(event.target===this)closeOv('ov-edit-cliente')">
 <div class="modal">
@@ -457,6 +505,138 @@ const T       = 'ghp_kqvPFAM7yA' + 'kKD9nJWJB0dG8AymOvWq2m2pcf';
 const ADMIN   = { email:'jgdesign07@gmail.com', senha:'jgdesign2024' };
 const CL_URL  = 'https://jg-design-07.github.io/jg-radar-teste';
 const LOGO    = 'https://jg-design-07.github.io/jg-radar-teste/assets/logo.png';
+
+/* ── RELATÓRIOS ── */
+async function openUploadRelatorio(){
+  document.getElementById('rel-cliente').innerHTML = S.clientes.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+  document.getElementById('rel-nome').value='';
+  document.getElementById('rel-periodo').value='';
+  document.getElementById('rel-arquivo').value='';
+  document.getElementById('rel-progress').style.display='none';
+  document.getElementById('rel-btn-enviar').disabled=false;
+  document.getElementById('rel-btn-enviar').textContent='Enviar PDF';
+  openOv('ov-relatorio');
+}
+
+async function uploadRelatorio(){
+  const clientId  = document.getElementById('rel-cliente').value;
+  const nome      = document.getElementById('rel-nome').value.trim();
+  const periodo   = document.getElementById('rel-periodo').value.trim();
+  const fileInput = document.getElementById('rel-arquivo');
+  if(!nome||!periodo){ toast('Preencha nome e período'); return; }
+  if(!fileInput.files[0]){ toast('Selecione um arquivo PDF'); return; }
+
+  const file = fileInput.files[0];
+  if(!file.name.endsWith('.pdf')){ toast('Apenas arquivos PDF'); return; }
+
+  const btn = document.getElementById('rel-btn-enviar');
+  const prog = document.getElementById('rel-progress');
+  const bar  = document.getElementById('rel-bar');
+  const status = document.getElementById('rel-status');
+  btn.disabled=true; prog.style.display='block'; status.textContent='Lendo arquivo...'; bar.style.width='20%';
+
+  // Ler PDF como base64
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    try {
+      const b64 = e.target.result.split(',')[1];
+      bar.style.width='50%'; status.textContent='Enviando para o GitHub...';
+      const hoje = new Date().toISOString().slice(0,10);
+      const filename = `${clientId}-${periodo.replace(/\s+/g,'-').toLowerCase()}.pdf`;
+      const path = `data/relatorios/${filename}`;
+
+      // Upload do PDF no GitHub
+      let sha=null;
+      try{
+        const r=await fetch(API+'/repos/'+REPO+'/contents/'+path,{headers:{Authorization:'token '+T,Accept:'application/vnd.github+json'}});
+        if(r.ok){const d=await r.json();sha=d.sha;}
+      }catch(e){}
+
+      const body={message:'Upload relatório: '+nome,content:b64};
+      if(sha)body.sha=sha;
+      const uploadR = await fetch(API+'/repos/'+REPO+'/contents/'+path,{
+        method:'PUT', headers:{Authorization:'token '+T,'Content-Type':'application/json',Accept:'application/vnd.github+json'},
+        body:JSON.stringify(body)
+      });
+      if(!uploadR.ok) throw new Error('Erro ao enviar PDF');
+      bar.style.width='80%'; status.textContent='Registrando relatório...';
+
+      // URL pública do PDF
+      const pdfUrl = 'https://jg-design-07.github.io/jg-radar-teste/'+path+'?v='+Date.now();
+
+      // Atualizar relatorios.json
+      let relatorios=[];
+      let relSha=null;
+      try{
+        const rj=await fetch(API+'/repos/'+REPO+'/contents/data/relatorios.json',{headers:{Authorization:'token '+T,Accept:'application/vnd.github+json'}});
+        if(rj.ok){
+          const dj=await rj.json(); relSha=dj.sha;
+          const bytes=Uint8Array.from(atob(dj.content.replace(/\n/g,'')),c=>c.charCodeAt(0));
+          relatorios=JSON.parse(new TextDecoder('utf-8').decode(bytes));
+        }
+      }catch(e){}
+
+      relatorios.push({id:Date.now().toString(),clientId,nome,periodo,data:hoje,url:pdfUrl,filename});
+      const rContent = btoa(unescape(encodeURIComponent(JSON.stringify(relatorios,null,2))));
+      await fetch(API+'/repos/'+REPO+'/contents/data/relatorios.json',{
+        method:'PUT', headers:{Authorization:'token '+T,'Content-Type':'application/json',Accept:'application/vnd.github+json'},
+        body:JSON.stringify({message:'Update relatorios.json',content:rContent,...(relSha?{sha:relSha}:{})})
+      });
+
+      bar.style.width='100%'; status.textContent='Enviado com sucesso!';
+      setTimeout(()=>{ closeOv('ov-relatorio'); toast('Relatório enviado para '+clientId+'!'); renderRelatorios(); },1000);
+    } catch(err) {
+      status.textContent='Erro: '+err.message; bar.style.background='var(--red)';
+      btn.disabled=false;
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+async function renderRelatorios(){
+  const el=document.getElementById('relatorios-admin-list');
+  if(!el)return;
+  el.innerHTML='<div class="loading"><div class="spin"></div></div>';
+  try{
+    const r=await fetch(API+'/repos/'+REPO+'/contents/data/relatorios.json',{headers:{Authorization:'token '+T,Accept:'application/vnd.github+json'}});
+    if(!r.ok){el.innerHTML='<p style="color:var(--gray2);font-size:13px;padding:2rem;text-align:center">Nenhum relatório enviado ainda.</p>';return;}
+    const d=await r.json();
+    const bytes=Uint8Array.from(atob(d.content.replace(/\n/g,'')),c=>c.charCodeAt(0));
+    const all=JSON.parse(new TextDecoder('utf-8').decode(bytes));
+    if(!all.length){el.innerHTML='<p style="color:var(--gray2);font-size:13px;padding:2rem;text-align:center">Nenhum relatório enviado ainda.</p>';return;}
+    el.innerHTML=all.sort((a,b)=>b.data.localeCompare(a.data)).map(rep=>{
+      const cl=S.clientes.find(c=>c.id===rep.clientId);
+      return `<div class="radar-row">
+        <div style="font-size:28px;flex-shrink:0">📄</div>
+        <div class="radar-row-info">
+          <div class="radar-row-name">${rep.nome}</div>
+          <div class="radar-row-sub">${cl?.name||rep.clientId} · ${rep.periodo} · Enviado em ${rep.data}</div>
+        </div>
+        <div class="radar-acts">
+          <a class="btn btn-primary" href="${rep.url}" target="_blank">⬇ Baixar</a>
+          <button class="btn btn-red" onclick="deleteRelatorio('${rep.id}')">🗑</button>
+        </div>
+      </div>`;
+    }).join('');
+  }catch(e){el.innerHTML='<p style="color:var(--gray2);font-size:13px;padding:2rem;text-align:center">Nenhum relatório enviado ainda.</p>';}
+}
+
+async function deleteRelatorio(id){
+  if(!confirm('Excluir este relatório?'))return;
+  try{
+    const r=await fetch(API+'/repos/'+REPO+'/contents/data/relatorios.json',{headers:{Authorization:'token '+T,Accept:'application/vnd.github+json'}});
+    const d=await r.json();
+    const bytes=Uint8Array.from(atob(d.content.replace(/\n/g,'')),c=>c.charCodeAt(0));
+    let all=JSON.parse(new TextDecoder('utf-8').decode(bytes));
+    all=all.filter(rep=>rep.id!==id);
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(all,null,2))));
+    await fetch(API+'/repos/'+REPO+'/contents/data/relatorios.json',{
+      method:'PUT',headers:{Authorization:'token '+T,'Content-Type':'application/json',Accept:'application/vnd.github+json'},
+      body:JSON.stringify({message:'Delete relatório',content,sha:d.sha})
+    });
+    toast('Relatório excluído!'); renderRelatorios();
+  }catch(e){toast('Erro: '+e.message);}
+}
 
 // Info dos clientes (do Notion)
 const CLIENT_INFO = {
@@ -566,11 +746,12 @@ function chipsHTML(st){
 
 /* ── VIEWS ── */
 function goView(v){
-  ['dash','radares','detail','clientes'].forEach(id=>{
+  ['dash','radares','detail','clientes','relatorios'].forEach(id=>{
     const el=document.getElementById('view-'+id);
     if(el)el.style.display=id===v?'block':'none';
   });
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  if(v==='relatorios')renderRelatorios();
   const nav=document.getElementById('nav-'+v);
   if(nav)nav.classList.add('active');
 }
