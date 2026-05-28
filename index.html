@@ -316,6 +316,27 @@ async function enterApp(preview) {
   await loadList();
 }
 
+async function fetchAllResponses() {
+  try {
+    const url = GH_API + '/repos/' + GH_REPO + '/issues?labels=radar-resposta&state=open&per_page=100';
+    const r = await fetch(url, { headers: { Authorization: 'token ' + T, Accept: 'application/vnd.github+json' } });
+    if (!r.ok) return;
+    const issues = await r.json();
+    STATE.resp_cache = {};
+    for (const issue of issues) {
+      try {
+        const body = JSON.parse(issue.body);
+        const key = body.radarId + '__' + body.postIndex;
+        if (!STATE.resp_cache[key] || new Date(body.ts) > new Date((STATE.resp_cache[key]||{}).ts||0)) {
+          STATE.resp_cache[key] = { radarId: body.radarId, postIndex: body.postIndex, status: body.status, ts: body.ts };
+        }
+      } catch(e) {}
+    }
+    // Re-renderizar lista para atualizar os chips
+    if (STATE.radares.length) renderList();
+  } catch(e) {}
+}
+
 async function loadList() {
   document.getElementById('list-content').innerHTML = '<div class="loading"><div class="spin"></div> Carregando radares...</div>';
   try {
@@ -347,7 +368,15 @@ function renderList() {
             '<div class="radar-name">' + (r.name || r.period) + '</div>' +
             '<div class="radar-meta">' + r.period + ' &middot; ' + r.posts.length + ' postagens</div>' +
             '<div class="chips">' +
-              (r.posts.length ? '<span class="chip chip-wait">&#9203; ' + r.posts.length + ' aguardando revisão</span>' : '') +
+              (() => {
+                const total = r.posts.length;
+                const resps = Object.values(STATE.resp_cache||{}).filter(rc => rc.radarId === r.id);
+                const respondidos = resps.length;
+                if (!total) return '';
+                if (respondidos >= total) return '<span class="chip chip-ok" style="background:rgba(46,204,113,.15);color:#2ECC71;border:1px solid rgba(46,204,113,.3);font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px">&#10003; Avaliado</span>';
+                if (respondidos > 0)      return '<span class="chip chip-alt" style="background:rgba(240,165,0,.15);color:#f0a500;border:1px solid rgba(240,165,0,.3);font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px">&#9999; Em andamento (' + respondidos + '/' + total + ')</span>';
+                return '<span class="chip chip-wait" style="background:rgba(255,255,255,.05);color:#888;border:1px solid rgba(255,255,255,.1);font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px">&#9203; ' + total + ' aguardando revisão</span>';
+              })() +
             '</div>' +
           '</div>' +
           '<div class="radar-arrow">&rsaquo;</div>' +
