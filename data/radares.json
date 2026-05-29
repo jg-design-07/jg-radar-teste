@@ -1,5 +1,108 @@
 [
   {
+    "id": "wsom-2026-05-19_2026-05-29",
+    "clientId": "wsom",
+    "clientName": "W Som Eventos & Produções",
+    "name": "Radar 2ª quinzena Maio 2026",
+    "period": "19/05 – 29/05/2026",
+    "start": "2026-05-19",
+    "end": "2026-05-29",
+    "year": "2026",
+    "posts": [
+      {
+        "idx": 0,
+        "data": "TER 19/05",
+        "dataISO": "2026-05-19",
+        "tipo": "Reels",
+        "obj": "Hero",
+        "tema": "Seja bem vindo",
+        "criativo": "https://drive.google.com/file/d/1HQ99bzD8Kmu3Gis2Rtw_iS7cg6Z00DVM/view",
+        "driveId": "1HQ99bzD8Kmu3Gis2Rtw_iS7cg6Z00DVM",
+        "isVideo": true,
+        "isCanva": false,
+        "legenda": "Um evento não pode depender da sorte.<br><br>Quando a execução falha, todo mundo percebe. Por isso, a W Som Eventos trabalha com organização, estrutura e controle antes mesmo da primeira música começar.<br><br>Mais do que som, luz e banda, entregamos segurança para que cada etapa aconteça como precisa acontecer.<br><br>W Som Eventos.<br>A solução pro seu evento."
+      },
+      {
+        "idx": 1,
+        "data": "QUA 20/05",
+        "dataISO": "2026-05-20",
+        "tipo": "Carrossel",
+        "obj": "Hub",
+        "tema": "O que ninguém vê antes de um grande evento",
+        "criativo": "https://drive.google.com/drive/folders/192wrHjpikdPevy6P6HS28ZP5ZtHwjUVI",
+        "driveId": null,
+        "isVideo": false,
+        "isCanva": true,
+        "legenda": "O público vê o evento pronto.<br>Mas antes disso existir, existe planejamento, alinhamento técnico e uma equipe cuidando de cada detalhe.<br><br>É isso que garante que tudo funcione no momento mais importante.<br><br>Na W Som, organização não é detalhe.<br>É parte da entrega."
+      },
+      {
+        "idx": 2,
+        "data": "SEX 22/05",
+        "dataISO": "2026-05-22",
+        "tipo": "Arte",
+        "obj": "Help",
+        "tema": "Quando a execução falha… todo mundo percebe.",
+        "criativo": "https://drive.google.com/file/d/1GuIM6l6l9OfPxiUwLOYATtakvJ7szzNz/view",
+        "driveId": "1GuIM6l6l9OfPxiUwLOYATtakvJ7szzNz",
+        "isVideo": false,
+        "isCanva": false,
+        "legenda": "Quando a estrutura está alinhada, o evento flui da forma certa.<br><br>É isso que permite que os convidados aproveitem a experiência sem perceber tudo o que existe por trás da execução.<br><br>Organização não aparece por acaso.<br>Ela é construída antes do evento começar."
+      },
+      {
+        "idx": 3,
+        "data": "SEG 25/05",
+        "dataISO": "2026-05-25",
+        "tipo": "Reels",
+        "obj": "Hero",
+        "tema": "Manifesto",
+        "criativo": "https://drive.google.com/file/d/1SgkHCMijMfGKPeZaw5_Ri3FPl8g-j6z_/view",
+        "driveId": "1SgkHCMijMfGKPeZaw5_Ri3FPl8g-j6z_",
+        "isVideo": true,
+        "isCanva": false,
+        "legenda": "Evento bom não acontece por acaso.<br><br>Por trás de cada momento bem executado existe uma equipe preparada, uma estrutura organizada e profissionais atentos em cada detalhe.<br><br>Na W Som, não é só sobre música.<br>É sobre responsabilidade, controle e execução profissional.<br><br>Porque no evento não existe segunda chance."
+      },
+      {
+        "idx": 4,
+        "data": "TER 26/05",
+        "dataISO": "2026-05-26",
+        "tipo": "Carrossel",
+        "obj": "Hub",
+        "tema": "Porque eventos dão errado?",
+        "criativo": "https://drive.google.com/drive/folders/10XY5zbQOIzDFHqAjffNxl2iVaENG20nA",
+        "driveId": null,
+        "isVideo": false,
+        "isCanva": true,
+        "legenda": "Muitos eventos dão errado não por falta de investimento.<br>Mas por falta de organização.<br><br>Atrasos, falhas técnicas, comunicação ruim e improviso comprometem a experiência de todo mundo.<br><br>Por isso, na W Som, execução profissional vem antes da música.<br><br>Porque quando tudo está alinhado, o evento acontece da forma que deveria acontecer."
+      },
+      {
+        "idx": 5,
+        "data": "QUA 27/05",
+        "dataISO": "2026-05-27",
+        "tipo": "Reels",
+        "obj": "Help",
+        "tema": "O que está incluso?",
+        "criativo": "https://drive.google.com/file/d/1FMxiCl57fFDc0dzirYM77gW30IJsBQ02/view",
+        "driveId": "1FMxiCl57fFDc0dzirYM77gW30IJsBQ02",
+        "isVideo": true,
+        "isCanva": false,
+        "legenda": "Quando você contrata uma banda, espera que tudo funcione.<br><br>Mas um grande evento precisa de muito mais do que música.<br><br>A W Som entrega estrutura completa, equipe técnica, iluminação, painel de LED e acompanhamento em cada detalhe da execução.<br><br>Porque profissionalismo começa muito antes da primeira música tocar."
+      },
+      {
+        "idx": 6,
+        "data": "SEX 29/05",
+        "dataISO": "2026-05-29",
+        "tipo": "Reels",
+        "obj": "Hub",
+        "tema": "O que a W Som significa pra você?",
+        "criativo": "https://drive.google.com/file/d/1yN4g8O6D3O3HRm9rSCrEpD3jM0IHyE-d/view",
+        "driveId": "1yN4g8O6D3O3HRm9rSCrEpD3jM0IHyE-d",
+        "isVideo": true,
+        "isCanva": false,
+        "legenda": "Por trás da W Som existem histórias, experiências e um compromisso muito claro: fazer o evento acontecer da forma certa.<br><br>Mais do que palco e música, existe responsabilidade em cada detalhe.<br><br>E para quem está por trás da operação, ver tudo funcionando perfeitamente é o que realmente faz sentido."
+      }
+    ]
+  },
+  {
     "id": "oceano-2026-05-12_2026-06-02",
     "clientId": "oceano",
     "clientName": "Oceano Perfumes",
