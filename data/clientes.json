@@ -16,5 +16,29 @@
     "name": "W Som Eventos & Produções",
     "email": "wsom@email.com",
     "senha": "wsom2026"
+  },
+  {
+    "id": "paixaotenis",
+    "name": "Paixão por Tênis",
+    "email": "paixaotenis@email.com",
+    "senha": "tenis2026"
+  },
+  {
+    "id": "mgf",
+    "name": "MGF Cosmetics",
+    "email": "mgf@email.com",
+    "senha": "mgf2026"
+  },
+  {
+    "id": "simetri",
+    "name": "Simetri Engenharia",
+    "email": "simetri@email.com",
+    "senha": "simetri2026"
+  },
+  {
+    "id": "conexao",
+    "name": "Conexão Queslon",
+    "email": "conexao@email.com",
+    "senha": "conexao2026"
   }
 ]
