@@ -593,6 +593,27 @@ if (prevToken) {
     try { STATE.cliente = JSON.parse(sess); enterApp(); } catch(e) {}
   }
 }
+
+function carMove(cid, dir) {
+  var wrap  = document.getElementById(cid);
+  var track = document.getElementById(cid + '-track');
+  var ctr   = document.getElementById(cid + '-counter');
+  var total = parseInt(wrap.dataset.total);
+  var idx   = parseInt(wrap.dataset.idx) + dir;
+  if (idx < 0 || idx >= total) return;
+  wrap.dataset.idx = String(idx);
+  track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+  if (ctr) ctr.textContent = (idx+1) + ' / ' + total;
+  wrap.querySelector('.prev').disabled = (idx === 0);
+  wrap.querySelector('.next').disabled = (idx === total - 1);
+  wrap.querySelectorAll('.carousel-dot').forEach(function(dot, i){ dot.classList.toggle('active', i === idx); });
+}
+function carDot(cid, idx) {
+  var wrap = document.getElementById(cid);
+  var cur  = parseInt(wrap.dataset.idx);
+  carMove(cid, idx - cur);
+}
+
 </script>
 </body>
 </html>
